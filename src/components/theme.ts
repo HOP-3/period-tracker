@@ -6,11 +6,15 @@ export const Theme = {
     },
     onboarding: {
       opacButton: '#FFCFCC',
-      flowRed: '#EDB3AD',
-      flowBlue: '#80E0F1',
+      red: '#EDB3AD',
+      blue: '#80E0F1',
     },
     background: {
       default: '#FAFAFA',
+    },
+    calendar: {
+      blue: '#13ABC7',
+      red: '#FF7C76',
     },
   },
 };
