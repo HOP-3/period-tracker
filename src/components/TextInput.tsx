@@ -15,8 +15,7 @@ type Props = {
     | 'phoneNumber'
     | 'codeConfirmation'
     | 'onboarding'
-    | 'normal'
-    | undefined;
+    | 'default'
 };
 
 export const Input: FC<Props> = ({
