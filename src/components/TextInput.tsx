@@ -19,7 +19,7 @@ type Props = {
     | undefined;
 };
 
-const Input: FC<Props> = ({
+export const Input: FC<Props> = ({
   width,
   height,
   placeholder,
