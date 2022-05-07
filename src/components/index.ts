@@ -2,3 +2,4 @@
 export * from './Calendar';
 export * from './Button';
 export * from './TextInput'
+export * from './SymptomModal';
