@@ -8,6 +8,7 @@ type ButtonType = PressableProps & {
   type?: 'primary' | 'secondary';
   width?: number;
   height?: number;
+  fontSize?: number;
 };
 export const Button: React.FC<ButtonType> = ({
   onPress,
@@ -18,6 +19,7 @@ export const Button: React.FC<ButtonType> = ({
   children,
   width = 100,
   height = 50,
+  fontSize = 17,
 }) => {
   return (
     <Pressable
@@ -33,7 +35,7 @@ export const Button: React.FC<ButtonType> = ({
         styles[type],
       ]}>
       <View style={[styles.icon]}>{iconLeft}</View>
-      <Text style={[styles.text, styles[type]]}>{children}</Text>
+      <Text style={[{fontSize}, styles[type]]}>{children}</Text>
       <View style={[styles.icon]}>{iconRight}</View>
     </Pressable>
   );
@@ -45,10 +47,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     borderWidth: 1,
-  },
-  text: {
-    fontSize: 17,
-    lineHeight: 22,
   },
   icon: {
     marginHorizontal: 10,

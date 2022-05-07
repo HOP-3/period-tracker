@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>639411328803-m0clhohdogn505uo0atk43rve03ocj1o.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.639411328803-m0clhohdogn505uo0atk43rve03ocj1o</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDPaM77TWPlA29W69xJr1tbVH1BTvW9Yoo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>639411328803</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.example.PeriodTracker</string>
+	<key>PROJECT_ID</key>
+	<string>period-tracker-4841e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>period-tracker-4841e.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:639411328803:ios:4fb376a2010da536351e96</string>
+</dict>
+</plist>
