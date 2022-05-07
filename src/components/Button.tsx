@@ -22,24 +22,22 @@ export const Button: React.FC<ButtonType> = ({
 }) => {
   //as
   return (
-    <>
-      <Pressable
-        onPress={onPress}
-        disabled={disabled}
-        style={[
-          {
-            width: width,
-            height: height,
-          },
-          styles.button,
-          disabled && styles.disabled,
-          styles[type],
-        ]}>
-        <View style={[styles.icon]}>{iconLeft}</View>
-        <Text style={[styles.text, styles[type]]}>{children}</Text>
-        <View style={[styles.icon]}>{iconRight}</View>
-      </Pressable>
-    </>
+    <Pressable
+      onPress={onPress}
+      disabled={disabled}
+      style={[
+        {
+          width: width,
+          height: height,
+        },
+        styles.button,
+        disabled && styles.disabled,
+        styles[type],
+      ]}>
+      <View style={[styles.icon]}>{iconLeft}</View>
+      <Text style={[styles.text, styles[type]]}>{children}</Text>
+      <View style={[styles.icon]}>{iconRight}</View>
+    </Pressable>
   );
 };
 const styles = StyleSheet.create({
