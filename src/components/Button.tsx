@@ -34,13 +34,29 @@ export const Button: React.FC<ButtonType> = ({
         disabled && styles.disabled,
         styles[type],
       ]}>
-      <View style={[{width: iconLeft != undefined ? 20 : 0}]}>{iconLeft}</View>
+      <View
+        style={[
+          {
+            width: iconLeft != undefined ? 25 : 0,
+            alignItems: 'center',
+            justifyContent: 'center',
+          },
+        ]}>
+        {iconLeft}
+      </View>
       <Typography
         type={type === 'primary' ? 'body_bold' : 'body_regular'}
         color={type === 'secondary' ? 'primary' : 'white'}
         children={children}
       />
-      <View style={[{width: iconRight != undefined ? 20 : 0}]}>
+      <View
+        style={[
+          {
+            width: iconRight != undefined ? 20 : 0,
+            alignItems: 'center',
+            justifyContent: 'center',
+          },
+        ]}>
         {iconRight}
       </View>
     </Pressable>
