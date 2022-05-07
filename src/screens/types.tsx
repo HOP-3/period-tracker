@@ -1,5 +1,5 @@
 export type RootStackParamList = {
-    Home : undefined;
-    Calendar : undefined;
-    Information : undefined;
-}
+  HomeScreen: undefined;
+  CalendarScreen: undefined;
+  InformationScreen: undefined;
+};
