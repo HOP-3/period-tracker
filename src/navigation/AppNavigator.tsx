@@ -3,7 +3,6 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../screens/types';
 import BottomTabs from '../navigation/BottomTabs';
-import {Home, Calendar, Information} from '../screens';
 import {
   createNativeStackNavigator,
   NativeStackNavigationProp,

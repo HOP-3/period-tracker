@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Pressable} from 'react-native';
 import CalendarMonth, {CalendarYear} from '../components/Calendar';
-import {Theme} from '../components/theme';
 export const CalendarScreen = () => {
   const [isMonth, setIsMonth] = useState(true);
   const markedDates: {[key: string]: 'period' | 'fertility' | 'normal'} = {
@@ -72,7 +71,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   activeButtonText: {
-    color: Theme.palette.primary.red,
+    color: '#FF7C76',
   },
   header: {
     backgroundColor: '#F7F7F7',
