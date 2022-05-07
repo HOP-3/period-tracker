@@ -1,9 +1,11 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
+import {Rectangle, Square} from './components/contentcards';
 const App = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Hello World</Text>
+      <Rectangle />
+      <Square />
     </SafeAreaView>
   );
 };
