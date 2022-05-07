@@ -62,6 +62,7 @@ buck-out/
 
 # Yarn Lock Ignore
 yarn.lock
-
+# Package Lock Ignore
+package-lock.json
 # Podfile Lock Ignore
 /ios/Podfile.lock
