@@ -20,7 +20,6 @@ export const Button: React.FC<ButtonType> = ({
   width = 100,
   height = 50,
 }) => {
-  //as
   return (
     <Pressable
       onPress={onPress}
