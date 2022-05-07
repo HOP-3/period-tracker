@@ -25,7 +25,7 @@ export const Input: FC<Props> = ({
   text,
   setText,
   inputType = 'default',
-  type,
+  type = "default",
   maxLength,
 }) => {
   return type == 'onboarding' ? (
