@@ -6,12 +6,25 @@ const App = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text>Hello World</Text>
+      <Button iconLeft={<RightArrow />} width={150} height={50}>
+        asdeasfda
+      </Button>
       <Button
-        size="L"
         disabled
+        width={150}
+        height={50}
         iconLeft={<RightArrow />}
-        width={130}
-        height={50}>
+        iconRight={<RightArrow />}>
+        asdeasfda
+      </Button>
+      <Button
+        iconLeft={<RightArrow />}
+        width={150}
+        height={50}
+        type="secondary">
+        asdeasfda
+      </Button>
+      <Button disabled width={130} height={50} type="secondary">
         asdeasfda
       </Button>
     </SafeAreaView>
