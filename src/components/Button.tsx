@@ -8,33 +8,41 @@ type ButtonType = PressableProps & {
   iconRight?: ReactNode;
   iconLeft?: ReactNode;
   type?: 'primary' | 'secondary';
+  width?: number;
+  height?: number;
 };
 export const Button: React.FC<ButtonType> = ({
   onPress,
   disabled = false,
   type = 'primary',
-  size = 'S',
   iconRight = false,
   iconLeft = false,
   children,
+  width,
+  height,
 }) => {
   return (
     <Pressable
       onPress={onPress}
       disabled={disabled}
       style={[
+        {
+          width: width,
+          height: height,
+        },
         styles.button,
-        styles[size],
         disabled && styles.disabled,
         styles[type],
       ]}>
-      <View style={{width: iconLeft != undefined ? 20 : 0}}>{iconLeft}</View>
+      <View style={[{width: iconLeft != undefined ? 20 : 0}]}>{iconLeft}</View>
       <Typography
         type={type === 'primary' ? 'body_bold' : 'body_regular'}
         color={type === 'secondary' ? 'primary' : 'white'}
         children={children}
       />
-      <View style={{width: iconRight != undefined ? 20 : 0}}>{iconRight}</View>
+      <View style={[{width: iconRight != undefined ? 20 : 0}]}>
+        {iconRight}
+      </View>
     </Pressable>
   );
 };
