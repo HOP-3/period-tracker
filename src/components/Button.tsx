@@ -10,7 +10,6 @@ type ButtonType = PressableProps & {
   width?: number;
   height?: number;
 };
-
 export const Button: React.FC<ButtonType> = ({
   onPress,
   disabled = false,
