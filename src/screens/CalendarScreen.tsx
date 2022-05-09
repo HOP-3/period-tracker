@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Pressable} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import CalendarMonth, {CalendarYear} from '../components/Calendar';
 import {Theme} from '../components/theme';
 export const CalendarScreen = () => {
   const [isMonth, setIsMonth] = useState(true);
   const markedDates: {[key: string]: 'period' | 'fertility' | 'normal'} = {
+    '2022-05-01': 'period',
+    '2022-05-02': 'period',
     '2022-05-15': 'period',
     '2022-05-16': 'period',
     '2022-05-21': 'period',
@@ -21,7 +24,7 @@ export const CalendarScreen = () => {
     '2022-06-25': 'fertility',
   };
   return (
-    <View style={[styles.col, styles.container]}>
+    <SafeAreaView style={[styles.col, styles.container]}>
       <View style={[styles.row, styles.center]}>
         <View style={[styles.row, styles.center, styles.header]}>
           <Pressable
@@ -46,7 +49,7 @@ export const CalendarScreen = () => {
       </View>
       <CalendarMonth markedDates={markedDates} isVisible={isMonth} />
       <CalendarYear markedDates={markedDates} isVisible={!isMonth} />
-    </View>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({

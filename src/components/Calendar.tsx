@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   Dimensions,
   ScrollView,
   StyleProp,
+  Pressable,
 } from 'react-native';
 import {Calendar, CalendarList} from 'react-native-calendars';
 import Drop from '../assets/svgs/miniCard Icons.svg';
@@ -15,6 +16,10 @@ import {Theme} from './theme';
 type CalendarPropsType = {
   markedDates: {[key: string]: 'period' | 'fertility' | 'normal'};
   isVisible: boolean;
+};
+type CalendarSelectPropsType = {
+  markedDates: string[];
+  setMarkedDates: (value: string[]) => void;
 };
 type CalendarYearItemType = {
   month: string;
@@ -56,19 +61,12 @@ LocaleConfig.locales['mn'] = {
 };
 LocaleConfig.defaultLocale = 'mn';
 
-const datesWithBlueDroplet = new Set([
-  '2022-05-01',
-  '2022-05-02',
-  '2022-05-03',
-  '2022-05-04',
-  '2022-05-05',
-  '2022-05-06',
-]);
 const date = new Date();
 const year = date.getFullYear();
 const month =
   date.getMonth() + 1 >= 10 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
 const day = date.getDate() >= 10 ? date.getDate() : '0' + date.getDate();
+const today = year + '-' + month + '-' + day;
 const width = Dimensions.get('window').width;
 export const CalendarMonth = ({isVisible, markedDates}: CalendarPropsType) => {
   return (
@@ -80,16 +78,34 @@ export const CalendarMonth = ({isVisible, markedDates}: CalendarPropsType) => {
       ]}
       dayComponent={({date, state}) => {
         return (
-          <View style={[styles.center, {height: 28}]}>
-            {state == 'today' && <Text>Ө</Text>}
-            <View style={[styles.defaultCalendarItem]}>
-              <Text>{date?.day}</Text>
+          <View style={[styles.center]}>
+            {state === 'today' && <Text style={{fontWeight: '700'}}>Ө</Text>}
+            <View
+              style={[
+                styles.center,
+                date?.dateString &&
+                markedDates[date?.dateString] == 'period' &&
+                date?.dateString < today
+                  ? drop.container
+                  : {},
+              ]}>
+              <Text
+                style={[
+                  date?.dateString &&
+                  markedDates[date?.dateString] == 'period' &&
+                  date?.dateString < today
+                    ? drop.text
+                    : {},
+                  {fontWeight: state === 'today' ? '700' : '400'},
+                ]}>
+                {date?.day}
+              </Text>
             </View>
             {date?.dateString &&
               markedDates[date?.dateString] == 'fertility' && <BlueDropLet />}
-            {date?.dateString && markedDates[date?.dateString] == 'period' && (
-              <Drop />
-            )}
+            {date?.dateString &&
+              markedDates[date?.dateString] == 'period' &&
+              date?.dateString >= today && <Drop />}
           </View>
         );
       }}
@@ -109,6 +125,63 @@ export const CalendarMonth = ({isVisible, markedDates}: CalendarPropsType) => {
       hideDayNames
       monthFormat={'MMM'}
       // ...calendarParams
+    />
+  );
+};
+export const CalendarSelectPeriod = ({
+  markedDates,
+  setMarkedDates,
+}: CalendarSelectPropsType) => {
+  const periodDates = useMemo(() => {
+    return new Set(markedDates);
+  }, []);
+  return (
+    <CalendarList
+      markingType={'custom'}
+      style={[styles.calendarContainer]}
+      dayComponent={({date}) => {
+        return (
+          <Pressable
+            onPress={() => {
+              let dates = periodDates;
+              if (date?.dateString) {
+                if (dates.has(date.dateString)) {
+                  dates.delete(date.dateString);
+                } else {
+                  dates.add(date.dateString);
+                }
+              }
+              let arr = Array.from(dates);
+              setMarkedDates(arr);
+            }}
+            style={[
+              styles.center,
+              date?.dateString && periodDates.has(date?.dateString)
+                ? drop.container
+                : drop.containerDisbled,
+              {
+                height: 24,
+              },
+            ]}>
+            <Text style={drop.text}>{date?.day}</Text>
+          </Pressable>
+        );
+      }}
+      renderHeader={date => {
+        return (
+          <View style={styles.headerContainer}>
+            <Text style={styles.header}>
+              {LocaleConfig.locales['mn'].monthNamesShort[date.getMonth()]}
+            </Text>
+          </View>
+        );
+      }}
+      pastScrollRange={Number(month) - 1}
+      futureScrollRange={12 - Number(month)}
+      scrollEnabled={true}
+      showScrollIndicator
+      hideDayNames
+      monthFormat={'MMM'}
     />
   );
 };
@@ -136,6 +209,7 @@ export const CalendarYear = ({isVisible, markedDates}: CalendarPropsType) => {
           marginRight: 16,
           marginLeft: 16,
           flexWrap: 'wrap',
+          marginBottom: 24,
         }}>
         {new Array(12).fill(0).map((_, index) => {
           let str = year + '-' + months[index] + '-01';
@@ -197,7 +271,7 @@ const CalendarYearItem = ({
           ? markedDates[date?.dateString]
           : 'normal';
         return (
-          <View style={[styles.defaultCalendarItem, dateContainerStyle[which]]}>
+          <View style={[dateContainerStyle[which], styles.center]}>
             <Text style={[styles.normal, dateStyle[which]]}>{date?.day}</Text>
           </View>
         );
@@ -229,12 +303,6 @@ const styles = StyleSheet.create({
     borderTopColor: '#D7D7D7',
     borderTopWidth: 1,
   },
-  defaultCalendarItem: {
-    height: 16,
-    width: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   yearlyCalendar: {
     width: (width - 48) / 2,
   },
@@ -263,7 +331,6 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '700',
     fontSize: 12,
-    lineHeight: 16,
     color: Theme.palette.calendar.red,
   },
   normal: {
@@ -271,14 +338,15 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '700',
     fontSize: 12,
-    lineHeight: 12,
   },
   fertilityContainer: {
     borderBottomWidth: 2,
+    width: 24,
     borderColor: Theme.palette.calendar.blue,
   },
   periodContainer: {
     borderBottomWidth: 2,
+    width: 24,
     borderColor: Theme.palette.calendar.red,
   },
   normalContainer: {},
@@ -300,6 +368,33 @@ const drop = StyleSheet.create({
         rotate: '45deg',
       },
     ],
+    height: 24,
+    width: 24,
+    margin: 0,
+    padding: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+  },
+  containerDisbled: {
+    borderColor: Theme.palette.onboarding.red,
+    borderWidth: 1,
+    borderRadius: 0,
+    borderBottomRightRadius: 16,
+    borderBottomLeftRadius: 16,
+    borderTopRightRadius: 16,
+    transform: [
+      {
+        rotate: '45deg',
+      },
+    ],
+    height: 24,
+    width: 24,
+    margin: 0,
+    padding: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
   },
   text: {
     fontStyle: 'normal',
