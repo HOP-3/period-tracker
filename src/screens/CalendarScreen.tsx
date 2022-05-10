@@ -5,6 +5,8 @@ import {Theme} from '../components/theme';
 export const CalendarScreen = () => {
   const [isMonth, setIsMonth] = useState(true);
   const markedDates: {[key: string]: 'period' | 'fertility' | 'normal'} = {
+    '2022-05-01': 'period',
+    '2022-05-02': 'period',
     '2022-05-15': 'period',
     '2022-05-16': 'period',
     '2022-05-21': 'period',
@@ -62,6 +64,7 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: 'white',
+    paddingBottom: 48,
   },
   buttonStyle: {
     width: 94,
