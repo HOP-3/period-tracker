@@ -11,7 +11,6 @@ import {
   Keyboard,
 } from 'react-native';
 import {Theme} from '../components/theme';
-import BackgroundImage from '../assets/images/Rectangle.png';
 import {Button, Input} from '../components';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
@@ -67,7 +66,9 @@ export const LoginScreen = () => {
         <Text style={style.header}>гартаа атга</Text>
       </View>
       <View style={style.flex}>
-        <ImageBackground source={BackgroundImage} style={style.imageBackground}>
+        <ImageBackground
+          source={require('../assets/images/Rectangle.png')}
+          style={style.imageBackground}>
           <ImageBackground
             source={require('../assets/images/circles.png')}
             // eslint-disable-next-line react-native/no-inline-styles
