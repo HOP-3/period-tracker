@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useContext, useMemo, useState} from 'react';
 import {
   View,
   Text,
@@ -7,12 +7,19 @@ import {
   ScrollView,
   StyleProp,
   Pressable,
+  Modal,
 } from 'react-native';
 import {Calendar, CalendarList} from 'react-native-calendars';
 import Drop from '../assets/svgs/miniCard Icons.svg';
 import BlueDropLet from '../assets/svgs/bluedrop.svg';
+import Exit from '../assets/svgs/exit.svg';
 import {LocaleConfig} from 'react-native-calendars';
 import {Theme} from './theme';
+import {Context} from '../providers/Provider';
+type SymptomType = {
+  text: string;
+  date: string;
+};
 type CalendarPropsType = {
   markedDates: {[key: string]: 'period' | 'fertility' | 'normal'};
   isVisible: boolean;
@@ -61,14 +68,9 @@ LocaleConfig.locales['mn'] = {
 };
 LocaleConfig.defaultLocale = 'mn';
 
-const date = new Date();
-const year = date.getFullYear();
-const month =
-  date.getMonth() + 1 >= 10 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
-const day = date.getDate() >= 10 ? date.getDate() : '0' + date.getDate();
-const today = year + '-' + month + '-' + day;
 const width = Dimensions.get('window').width;
 export const CalendarMonth = ({isVisible, markedDates}: CalendarPropsType) => {
+  const {month} = useContext(Context);
   return (
     <CalendarList
       markingType={'custom'}
@@ -76,39 +78,13 @@ export const CalendarMonth = ({isVisible, markedDates}: CalendarPropsType) => {
         styles.calendarContainer,
         isVisible ? styles.visible : styles.hidden,
       ]}
-      dayComponent={({date, state}) => {
-        return (
-          <View style={[styles.center]}>
-            {state === 'today' && <Text style={{fontWeight: '700'}}>Ө</Text>}
-            <View
-              style={[
-                styles.center,
-                date?.dateString &&
-                markedDates[date?.dateString] == 'period' &&
-                date?.dateString < today
-                  ? drop.container
-                  : {},
-              ]}>
-              <Text
-                style={[
-                  date?.dateString &&
-                  markedDates[date?.dateString] == 'period' &&
-                  date?.dateString < today
-                    ? drop.text
-                    : {},
-                  {fontWeight: state === 'today' ? '700' : '400'},
-                ]}>
-                {date?.day}
-              </Text>
-            </View>
-            {date?.dateString &&
-              markedDates[date?.dateString] == 'fertility' && <BlueDropLet />}
-            {date?.dateString &&
-              markedDates[date?.dateString] == 'period' &&
-              date?.dateString >= today && <Drop />}
-          </View>
-        );
-      }}
+      dayComponent={({date, state}) => (
+        <CalendarListDayComponent
+          markedDates={markedDates}
+          date={date}
+          state={state}
+        />
+      )}
       renderHeader={date => {
         return (
           <View style={styles.headerContainer}>
@@ -132,6 +108,8 @@ export const CalendarSelectPeriod = ({
   markedDates,
   setMarkedDates,
 }: CalendarSelectPropsType) => {
+  const {month} = useContext(Context);
+
   const periodDates = useMemo(() => {
     return new Set(markedDates);
   }, []);
@@ -187,6 +165,7 @@ export const CalendarSelectPeriod = ({
 };
 
 export const CalendarYear = ({isVisible, markedDates}: CalendarPropsType) => {
+  const {month, year} = useContext(Context);
   const months = [
     '01',
     '02',
@@ -283,9 +262,107 @@ const CalendarYearItem = ({
       hideExtraDays
     />
   ) : null;
+const CalendarListDayComponent = ({
+  date,
+  state,
+  markedDates,
+}: {
+  date: any;
+  state: string | undefined;
+  markedDates: {[key: string]: 'period' | 'fertility' | 'normal'};
+}) => {
+  const {today, symptomObj} = useContext(Context);
+  const [isSymptomModalOpen, setIsSymptomModalOpen] = useState(false);
+  return (
+    <Pressable
+      style={[styles.center, {position: 'relative'}]}
+      onPress={() => setIsSymptomModalOpen(!isSymptomModalOpen)}>
+      <SymptomModal
+        setIsVisible={setIsSymptomModalOpen}
+        visible={isSymptomModalOpen}
+        symptoms={symptomObj[date.dateString]}
+      />
+      {/* {state === 'today' && <Text style={{fontWeight: '700'}}>Ө</Text>} */}
+      <View
+        style={[
+          styles.center,
+          date?.dateString &&
+          markedDates[date?.dateString] == 'period' &&
+          date?.dateString < today
+            ? drop.container
+            : {},
+          ,
+          state === 'today' && styles.today,
+          styles.monthlyCalendarItem,
+        ]}>
+        <Text
+          style={[
+            date?.dateString &&
+            markedDates[date?.dateString] == 'period' &&
+            date?.dateString < today
+              ? drop.text
+              : {},
+            {fontWeight: state === 'today' ? '700' : '400'},
+          ]}>
+          {date?.day}
+        </Text>
+      </View>
+      {date?.dateString && markedDates[date?.dateString] == 'fertility' && (
+        <BlueDropLet />
+      )}
+      {date?.dateString &&
+        markedDates[date?.dateString] == 'period' &&
+        date?.dateString >= today && <Drop />}
+      {date?.dateString && symptomObj[date?.dateString] && (
+        <View style={styles.symptomDot} />
+      )}
+    </Pressable>
+  );
+};
+const SymptomModal = ({
+  visible,
+  symptoms,
+  setIsVisible,
+}: {
+  visible: boolean;
+  symptoms: SymptomType[];
+  setIsVisible: (visible: boolean) => void;
+}) => {
+  return (
+    <Modal visible={visible} transparent>
+      <View style={styles.symptomModalContainer}>
+        <View style={styles.symptomModalMiddleContainer}>
+          <Pressable
+            onPress={() => setIsVisible(false)}
+            style={styles.symptomModalExit}>
+            <Exit />
+          </Pressable>
+          {symptoms && symptoms.length > 0 ? (
+            symptoms.map((symptom, index) => {
+              return (
+                <View key={index}>
+                  <Text>* {symptom.text}</Text>
+                </View>
+              );
+            })
+          ) : (
+            <Text>Симптомыг тохируулаагүй байна</Text>
+          )}
+        </View>
+      </View>
+    </Modal>
+  );
+};
 const styles = StyleSheet.create({
   calendarContainer: {
     marginHorizontal: 0,
+  },
+  today: {
+    borderWidth: 1,
+    borderColor: '#000',
+    borderRadius: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   header: {
     // fontFamily: 'Open Sans',
@@ -353,6 +430,33 @@ const styles = StyleSheet.create({
   center: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  monthlyCalendarItem: {
+    width: 32,
+    height: 32,
+  },
+  symptomDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: Theme.palette.calendar.red,
+    marginTop: 2,
+  },
+  symptomModalContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+  symptomModalMiddleContainer: {
+    width: width - 64,
+    backgroundColor: 'white',
+    padding: 32,
+  },
+  symptomModalExit: {
+    position: 'absolute',
+    right: 8,
+    top: 8,
   },
 });
 
