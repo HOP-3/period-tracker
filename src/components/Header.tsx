@@ -3,14 +3,21 @@ import {View, StyleSheet} from 'react-native';
 import Notification from '../assets/svgs/notification.svg';
 import User from '../assets/svgs/user.svg';
 import Logo from '../assets/svgs/logo.svg';
-const Header = () => {
+
+type HeaderType = {
+  icon?: boolean;
+};
+
+const Header: React.FC<HeaderType> = ({icon = true}) => {
   return (
-    <View style={styles.container}>
+    <View style={icon ? styles.container : styles.icon}>
       <Logo />
-      <View style={{flexDirection: 'row'}}>
-        <Notification style={{marginRight: 10}} />
-        <User />
-      </View>
+      {icon && (
+        <View style={{flexDirection: 'row'}}>
+          <Notification style={{marginRight: 10}} />
+          <User />
+        </View>
+      )}
     </View>
   );
 };
@@ -24,6 +31,13 @@ const styles = StyleSheet.create({
     padding: 12,
     borderBottomWidth: 0.2,
     borderColor: '#767676',
+  },
+  icon: {
+    display: 'flex',
+    backgroundColor: 'white',
+    padding: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
