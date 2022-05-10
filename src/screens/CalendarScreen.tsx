@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Pressable} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import CalendarMonth, {CalendarYear} from '../components/Calendar';
 import {Theme} from '../components/theme';
 export const CalendarScreen = () => {
@@ -24,7 +23,7 @@ export const CalendarScreen = () => {
     '2022-06-25': 'fertility',
   };
   return (
-    <SafeAreaView style={[styles.col, styles.container]}>
+    <View style={[styles.col, styles.container]}>
       <View style={[styles.row, styles.center]}>
         <View style={[styles.row, styles.center, styles.header]}>
           <Pressable
@@ -49,7 +48,7 @@ export const CalendarScreen = () => {
       </View>
       <CalendarMonth markedDates={markedDates} isVisible={isMonth} />
       <CalendarYear markedDates={markedDates} isVisible={!isMonth} />
-    </SafeAreaView>
+    </View>
   );
 };
 const styles = StyleSheet.create({
@@ -65,6 +64,7 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: 'white',
+    paddingBottom: 48,
   },
   buttonStyle: {
     width: 94,
