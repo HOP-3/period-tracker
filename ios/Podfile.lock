@@ -1055,10 +1055,10 @@ PODS:
     - React-jsi (= 0.68.1)
     - React-logger (= 0.68.1)
     - React-perflogger (= 0.68.1)
-  - RNFBApp (14.9.1):
+  - RNFBApp (14.9.2):
     - Firebase/CoreOnly (= 8.15.0)
     - React-Core
-  - RNFBFirestore (14.9.1):
+  - RNFBFirestore (14.9.2):
     - Firebase/Firestore (= 8.15.0)
     - React-Core
     - RNFBApp
@@ -1299,8 +1299,8 @@ SPEC CHECKSUMS:
   React-RCTVibration: 9e344c840176b0af9c84d5019eb4fed8b3c105a1
   React-runtimeexecutor: 7285b499d0339104b2813a1f58ad1ada4adbd6c0
   ReactCommon: bf2888a826ceedf54b99ad1b6182d1bc4a8a3984
-  RNFBApp: fd23737680ed2bdde41ca27d8bfb171b6d668c6b
-  RNFBFirestore: 1f23c9c31cfa96d532a33255d89feb70b1052465
+  RNFBApp: 6f5c7b9931378efb467e08144959ff93172ac83b
+  RNFBFirestore: 1a1ac7d27ba17681ff27cfc91a6ea34541a8b883
   RNScreens: 40a2cb40a02a609938137a1e0acfbf8fc9eebf19
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
