@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Text} from 'react-native';
 
 export const HomeScreen = () => {
@@ -8,4 +8,5 @@ export const HomeScreen = () => {
     </View>
   );
 };
+
 export default HomeScreen;
