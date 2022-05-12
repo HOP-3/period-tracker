@@ -12,7 +12,6 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 const BottomTabs = () => {
   const Tab = createBottomTabNavigator();
-
   return (
     <Tab.Navigator
       initialRouteName="Home"
