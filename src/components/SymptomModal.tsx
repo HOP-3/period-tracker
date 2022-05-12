@@ -7,6 +7,8 @@ import {
   StyleSheet,
   Dimensions,
   SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import {Button} from './Button';
@@ -42,7 +44,9 @@ export const SymptomModal = () => {
           setModalVisible(!modalVisible);
         }}>
         <SafeAreaView>
-          <View style={styles.modal}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={styles.modal}>
             <TextInput
               onChangeText={setField}
               multiline
@@ -69,7 +73,7 @@ export const SymptomModal = () => {
                 Цуцлах
               </Button>
             </View>
-          </View>
+          </KeyboardAvoidingView>
         </SafeAreaView>
       </Modal>
       <View style={styles.container}>
@@ -94,12 +98,12 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   modal: {
-    marginTop: 'auto',
-    marginBottom: 'auto',
-    marginRight: 'auto',
-    marginLeft: 'auto',
+    // marginTop: 'auto',
+    // marginBottom: 'auto',
+    // marginRight: 'auto',
+    // marginLeft: 'auto',
     padding: 10,
-    width: width,
+    // width: width,
     height: '100%',
     flexDirection: 'column',
     justifyContent: 'space-between',
