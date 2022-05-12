@@ -25,10 +25,10 @@ const {width} = Dimensions.get('screen');
 export const LoginScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const [text, setText] = useState('');
-
   const [confirm, setConfirm] =
     useState<FirebaseAuthTypes.ConfirmationResult | null>(null);
   const [code, setCode] = useState('');
+  const [error, setError] = useState('');
   const signInWithPhoneNumber = async () => {
     const confirmation = await auth().signInWithPhoneNumber('+976' + text);
     setConfirm(confirmation);
@@ -53,8 +53,9 @@ export const LoginScreen = () => {
             navigation.navigate('Content');
           }
         });
-      } catch (error) {
-        console.log('Invalid code.');
+      } catch (err) {
+        console.log(err);
+        setError('Код буруу байна.');
       }
     }
   };
@@ -82,7 +83,11 @@ export const LoginScreen = () => {
                   {confirm ? (
                     <>
                       <View>
-                        <Text style={style.label}>Баталгаажуулах код</Text>
+                        <View style={style.errorContainer}>
+                          <Text style={style.label}>Баталгаажуулах код</Text>
+                          <Text style={style.errorMessage}>{error}</Text>
+                        </View>
+
                         <Input
                           text={code}
                           setText={setCode}
@@ -144,6 +149,15 @@ export const LoginScreen = () => {
   );
 };
 const style = StyleSheet.create({
+  errorMessage: {
+    color: 'red',
+    marginRight: 10,
+    fontWeight: '400',
+  },
+  errorContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   container: {
     backgroundColor: 'white',
     justifyContent: 'center',

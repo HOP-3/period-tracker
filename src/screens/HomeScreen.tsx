@@ -5,6 +5,7 @@ import {SymptomModal} from '../components';
 export const HomeScreen = () => {
   return (
     <View>
+      <SymptomModal />
       <Text>Home</Text>
       <SymptomModal />
     </View>
