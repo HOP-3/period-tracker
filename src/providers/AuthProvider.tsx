@@ -1,12 +1,15 @@
 import React, {createContext, useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
+import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 
 type ContextType = {
   userId: string | null;
+  user: FirebaseAuthTypes.User | null;
 };
 
 export const AuthContext = createContext<ContextType>({
   userId: null,
+  user: null,
 });
 
 const makeid = () => {
@@ -22,6 +25,7 @@ const makeid = () => {
 
 export const AuthProvider = ({children}: any) => {
   const [userId, setUserId] = useState<string | null>(null);
+  const user = auth().currentUser;
   const makeSureIdIsThere = async () => {
     const id = await AsyncStorage.getItem('id');
     if (id === null) {
@@ -36,6 +40,8 @@ export const AuthProvider = ({children}: any) => {
     makeSureIdIsThere();
   }, []);
   return (
-    <AuthContext.Provider value={{userId}}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{userId, user}}>
+      {children}
+    </AuthContext.Provider>
   );
 };
