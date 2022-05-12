@@ -1,21 +1,30 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Pressable} from 'react-native';
 import Notification from '../assets/svgs/notification.svg';
 import User from '../assets/svgs/user.svg';
 import Logo from '../assets/svgs/logo.svg';
+import {useNavigation} from '@react-navigation/native';
 
 type HeaderType = {
   icon?: boolean;
 };
 
 const Header: React.FC<HeaderType> = ({icon = true}) => {
+  const navigation = useNavigation<any>();
+
+  console.log(navigation);
   return (
     <View style={icon ? styles.container : styles.icon}>
       <Logo />
       {icon && (
         <View style={{flexDirection: 'row'}}>
           <Notification style={{marginRight: 10}} />
-          <User />
+          <Pressable
+            onPress={() => {
+              navigation.navigate('Profile');
+            }}>
+            <User />
+          </Pressable>
         </View>
       )}
     </View>
