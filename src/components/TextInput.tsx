@@ -11,11 +11,7 @@ type Props = {
   setText: Dispatch<SetStateAction<string>>;
   inputType?: KeyboardTypeOptions;
   maxLength?: number | undefined;
-  type:
-    | 'phoneNumber'
-    | 'codeConfirmation'
-    | 'onboarding'
-    | 'default'
+  type: 'phoneNumber' | 'codeConfirmation' | 'onboarding' | 'default';
 };
 
 export const Input: FC<Props> = ({
@@ -25,10 +21,10 @@ export const Input: FC<Props> = ({
   text,
   setText,
   inputType = 'default',
-  type = "default",
+  type = 'default',
   maxLength,
 }) => {
-  return type == 'onboarding' ? (
+  return type === 'onboarding' ? (
     <TextInput
       placeholder={placeholder}
       value={text}
@@ -41,9 +37,13 @@ export const Input: FC<Props> = ({
       ]}
     />
   ) : (
-    <View style={[styles.container,{width: width === undefined ? '100%' : width, height: height}]}>
-      {type == 'phoneNumber' && <Phone />}
-      {type == 'codeConfirmation' && <Key />}
+    <View
+      style={[
+        styles.container,
+        {width: width === undefined ? '100%' : width, height: height},
+      ]}>
+      {type === 'phoneNumber' && <Phone />}
+      {type === 'codeConfirmation' && <Key />}
       <TextInput
         value={text}
         onChangeText={setText}
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     borderColor: '#EAEAEA',
     borderWidth: 1,
     padding: 15,
-    borderRadius:5
+    borderRadius: 5,
   },
 });
 

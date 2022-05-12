@@ -3,4 +3,5 @@ export type RootStackParamList = {
   CalendarScreen: undefined;
   InformationScreen: undefined;
   Content: undefined;
+  Login: undefined;
 };

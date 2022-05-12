@@ -8,4 +8,5 @@ export const HomeScreen = () => {
     </View>
   );
 };
+
 export default HomeScreen;

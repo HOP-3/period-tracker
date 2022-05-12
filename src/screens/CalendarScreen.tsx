@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Pressable} from 'react-native';
-import CalendarMonth, {CalendarYear} from '../components/Calendar';
+
+import {CalendarYear, CalendarMonth} from '../components';
 import {Theme} from '../components/theme';
+
 export const CalendarScreen = () => {
   const [isMonth, setIsMonth] = useState(true);
   const markedDates: {[key: string]: 'period' | 'fertility' | 'normal'} = {
