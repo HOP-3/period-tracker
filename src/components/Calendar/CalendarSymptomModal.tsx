@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 
-import Exit from '../assets/svgs/exit.svg';
+import Exit from '../../assets/svgs/exit.svg';
 
 type SymptomType = {
   text: string;
@@ -23,7 +23,7 @@ type SymptomModalType = {
 
 const width = Dimensions.get('window').width;
 
-export const SymptomModal = ({
+export const SymptomShowModal = ({
   visible,
   symptoms,
   setIsVisible,
@@ -71,4 +71,4 @@ const styles = StyleSheet.create({
     top: 8,
   },
 });
-export default SymptomModal;
+export default SymptomShowModal;

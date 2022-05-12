@@ -6,23 +6,22 @@ import {
   Dimensions,
   ScrollView,
   StyleProp,
-  Pressable,
 } from 'react-native';
 import {Calendar, LocaleConfig} from 'react-native-calendars';
 
-import {Theme} from './theme';
+import {Theme} from '../theme';
 
-import {Context} from '../providers/Provider';
+import {Context} from '../../providers/Provider';
 
 type CalendarPropsType = {
-  markedDates: {[key: string]: 'period' | 'fertility' | 'normal'};
+  markedDates: {[key: string]: 'period' | 'ovulation' | 'normal'};
   isVisible: boolean;
 };
 
 type CalendarYearItemType = {
   month: string;
   isCurrentMonth: boolean;
-  markedDates: {[key: string]: 'period' | 'fertility' | 'normal'};
+  markedDates: {[key: string]: 'period' | 'ovulation' | 'normal'};
 };
 
 LocaleConfig.locales['mn'] = {
@@ -121,23 +120,23 @@ const CalendarYearItem = ({
       dayComponent={({date}) => {
         const dateStyle: {
           period: StyleProp<any>;
-          fertility: StyleProp<any>;
+          ovulation: StyleProp<any>;
           normal: StyleProp<any>;
         } = {
           period: styles.period,
-          fertility: styles.fertility,
+          ovulation: styles.ovulation,
           normal: styles.normal,
         };
         const dateContainerStyle: {
           period: StyleProp<any>;
-          fertility: StyleProp<any>;
+          ovulation: StyleProp<any>;
           normal: StyleProp<any>;
         } = {
           period: styles.periodContainer,
-          fertility: styles.fertilityContainer,
+          ovulation: styles.ovulationContainer,
           normal: styles.normalContainer,
         };
-        const which: 'period' | 'fertility' | 'normal' = date?.dateString
+        const which: 'period' | 'ovulation' | 'normal' = date?.dateString
           ? markedDates[date?.dateString]
           : 'normal';
         return (
@@ -187,7 +186,7 @@ const styles = StyleSheet.create({
   hidden: {
     display: 'none',
   },
-  fertility: {
+  ovulation: {
     // fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: '700',
@@ -207,7 +206,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 12,
   },
-  fertilityContainer: {
+  ovulationContainer: {
     borderBottomWidth: 2,
     width: 24,
     borderColor: Theme.palette.calendar.blue,
