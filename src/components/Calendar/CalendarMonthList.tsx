@@ -117,7 +117,7 @@ const CalendarListDayComponent = ({
 
 const styles = StyleSheet.create({
   periodContainer: {
-    backgroundColor: Theme.palette.onboarding.red,
+    backgroundColor: Theme.palette.primary.red,
     borderRadius: 0,
     borderBottomRightRadius: 16,
     borderBottomLeftRadius: 16,
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
     ],
   },
   symptomContainer: {
-    backgroundColor: Theme.palette.onboarding.red,
+    backgroundColor: Theme.palette.primary.red,
     borderRadius: 0,
     borderBottomRightRadius: 16,
     borderBottomLeftRadius: 16,

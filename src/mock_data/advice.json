@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Эрэлттэй",
+    "data": [
+      {
+        "imageUrl": "http://cdn.shopify.com/s/files/1/0066/7569/3639/articles/vitamin-c-benefits.jpg?v=1623791337",
+        "title": "С амин дэмийн талаар чиний мэдэх ёстой бүхэн"
+      },
+      {
+        "imageUrl": "https://imageio.forbes.com/specials-images/imageserve/5fea5a330b6c5fc03433421f/Mixed-Race-Woman-Applying-Face-Cream--Here-s-the-truth-behind-11-skincare-myths-/960x0.jpg?fit=bounds&format=jpg&width=960",
+        "title": "Нялх үрчлээгээ арилгахад чинь туслах нандин аргууд"
+      }
+    ]
+  },
+  {
+    "name": "Эрүүл мэнд",
+    "data": [
+      {
+        "imageUrl": "http://cdn.shopify.com/s/files/1/0066/7569/3639/articles/vitamin-c-benefits.jpg?v=1623791337",
+        "title": "Инфрадиан хэмнэл гэж юу вэ?"
+      },
+      {
+        "imageUrl": "https://imageio.forbes.com/specials-images/imageserve/5fea5a330b6c5fc03433421f/Mixed-Race-Woman-Applying-Face-Cream--Here-s-the-truth-behind-11-skincare-myths-/960x0.jpg?fit=bounds&format=jpg&width=960",
+        "title": "Сонирхлыг тань татах агаарын иогийн үндсэн 8 техник"
+      },
+      {
+        "imageUrl": "https://imageio.forbes.com/specials-images/imageserve/5fea5a330b6c5fc03433421f/Mixed-Race-Woman-Applying-Face-Cream--Here-s-the-truth-behind-11-skincare-myths-/960x0.jpg?fit=bounds&format=jpg&width=960",
+        "title": "Нууцхан шивнээ: Энийг яаж хэрэглэдэг юм бэ?"
+      }
+    ]
+  },
+  {
+    "name": "Ариун цэвэр",
+    "data": [
+      {
+        "imageUrl": "http://cdn.shopify.com/s/files/1/0066/7569/3639/articles/vitamin-c-benefits.jpg?v=1623791337",
+        "title": "Бид яагаад нарны тос хэрэглэх шаардлагатай вэ?"
+      },
+      {
+        "imageUrl": "https://imageio.forbes.com/specials-images/imageserve/5fea5a330b6c5fc03433421f/Mixed-Race-Woman-Applying-Face-Cream--Here-s-the-truth-behind-11-skincare-myths-/960x0.jpg?fit=bounds&format=jpg&width=960",
+        "title": "Арьс арчилгааны оргил цаг - ОРОЙ"
+      },
+      {
+        "imageUrl": "https://imageio.forbes.com/specials-images/imageserve/5fea5a330b6c5fc03433421f/Mixed-Race-Woman-Applying-Face-Cream--Here-s-the-truth-behind-11-skincare-myths-/960x0.jpg?fit=bounds&format=jpg&width=960",
+        "title": "Сайн гарын тос ямар найрлагатай байдаг вэ?"
+      }
+    ]
+  },
+  {
+    "name": "Хоол хүнс",
+    "data": [
+      {
+        "imageUrl": "http://cdn.shopify.com/s/files/1/0066/7569/3639/articles/vitamin-c-benefits.jpg?v=1623791337",
+        "title": "“Эрүүл хооллолт”-ын тэнцвэртэй хэмжээ ямар байх ёстой вэ?"
+      },
+      {
+        "imageUrl": "https://imageio.forbes.com/specials-images/imageserve/5fea5a330b6c5fc03433421f/Mixed-Race-Woman-Applying-Face-Cream--Here-s-the-truth-behind-11-skincare-myths-/960x0.jpg?fit=bounds&format=jpg&width=960",
+        "title": "Өдрийн аль цагт, ямар хэмжээгээр хооллох нь зөв бэ?"
+      },
+      {
+        "imageUrl": "https://imageio.forbes.com/specials-images/imageserve/5fea5a330b6c5fc03433421f/Mixed-Race-Woman-Applying-Face-Cream--Here-s-the-truth-behind-11-skincare-myths-/960x0.jpg?fit=bounds&format=jpg&width=960",
+        "title": "Бидний идэх ёстой жимс, жимсгэний нэг өдрийн “норм” ямар вэ?"
+      }
+    ]
+  }
+]

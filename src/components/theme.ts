@@ -16,5 +16,10 @@ export const Theme = {
       red: '#FF7C76',
       black: '#303030',
     },
+    advice: {
+      primary: '#FFFFFF',
+      secondary: '#FF7C76',
+      thirtary: '#E7E7E7',
+    },
   },
 };
