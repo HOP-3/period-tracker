@@ -15,6 +15,7 @@ export const Theme = {
     calendar: {
       blue: '#13ABC7',
       red: '#FF7C76',
+      black: '#303030',
     },
   },
 };
