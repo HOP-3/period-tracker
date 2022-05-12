@@ -7,7 +7,6 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {OnBoarding} from '../screens';
 import Header from '../components/Header';
 import {ProfileScreen} from '../screens/ProfileScreen';
-import {Button} from '../components';
 
 const Stack = createNativeStackNavigator();
 
