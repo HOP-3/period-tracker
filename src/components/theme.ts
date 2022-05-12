@@ -5,9 +5,8 @@ export const Theme = {
       blue: '#80E0F1',
     },
     onboarding: {
-      opacButton: '#FFCFCC',
-      red: '#EDB3AD',
-      blue: '#80E0F1',
+      white: '#FFFFFF',
+      grey: '#767676',
     },
     background: {
       default: '#FAFAFA',
