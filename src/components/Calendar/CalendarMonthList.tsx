@@ -1,17 +1,17 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useMemo, useState} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {CalendarList, LocaleConfig} from 'react-native-calendars';
 
-import {Context} from '../providers/Provider';
-import SymptomModal from './CalendarSymptomModal';
+import {Context} from '../../providers/Provider';
+import {SymptomShowModal} from './CalendarSymptomModal';
 
-import Drop from '../assets/svgs/miniCard Icons.svg';
-import BlueDropLet from '../assets/svgs/bluedrop.svg';
+import Drop from '../../assets/svgs/miniCard Icons.svg';
+import BlueDropLet from '../../assets/svgs/bluedrop.svg';
 
-import {Theme} from './theme';
+import {Theme} from '../theme';
 
 type CalendarPropsType = {
-  markedDates: {[key: string]: 'period' | 'fertility' | 'normal'};
+  markedDates: {[key: string]: 'period' | 'ovulation' | 'normal'};
   isVisible: boolean;
 };
 
@@ -53,58 +53,70 @@ const CalendarListDayComponent = ({
 }: {
   date: any;
   state: string | undefined;
-  markedDates: {[key: string]: 'period' | 'fertility' | 'normal'};
+  markedDates: {[key: string]: 'period' | 'ovulation' | 'normal'};
 }) => {
   const {today, symptomObj} = useContext(Context);
   const [isSymptomModalOpen, setIsSymptomModalOpen] = useState(false);
+  const type = useMemo(() => {
+    if (date) {
+      const dateString = date.dateString;
+      if (markedDates[dateString]) {
+        if (date.dateString <= today) {
+          return markedDates[dateString];
+        }
+        if (markedDates[dateString] === 'ovulation') {
+          return 'ovulation';
+        }
+        return 'possible_' + markedDates[dateString];
+      }
+    } else {
+      return 'normal';
+    }
+  }, [symptomObj, date, markedDates]);
   return (
     <Pressable
       style={[styles.center, {position: 'relative'}]}
       onPress={() => setIsSymptomModalOpen(!isSymptomModalOpen)}>
-      <SymptomModal
-        setIsVisible={setIsSymptomModalOpen}
-        visible={isSymptomModalOpen}
-        symptoms={symptomObj[date.dateString]}
-      />
-      {/* {state === 'today' && <Text style={{fontWeight: '700'}}>Ө</Text>} */}
-      <View
-        style={[
-          styles.center,
-          date?.dateString &&
-          markedDates[date?.dateString] == 'period' &&
-          date?.dateString < today
-            ? styles.dropContainer
-            : {},
-          ,
-          state === 'today' && styles.today,
-          styles.monthlyCalendarItem,
-        ]}>
-        <Text
+      <View style={{alignItems: 'center'}}>
+        <SymptomShowModal
+          setIsVisible={setIsSymptomModalOpen}
+          visible={isSymptomModalOpen}
+          symptoms={symptomObj[date.dateString]}
+        />
+        {date?.dateString && symptomObj[date?.dateString] && (
+          <View style={styles.symptomDot} />
+        )}
+        {/* {state === 'today' && <Text style={{fontWeight: '700'}}>Ө</Text>} */}
+        <View
           style={[
+            styles.center,
             date?.dateString &&
-              markedDates[date?.dateString] == 'period' &&
-              date?.dateString < today &&
-              styles.dropText,
-            {fontWeight: state === 'today' ? '700' : '400'},
+              symptomObj[date?.dateString] &&
+              styles.symptomContainer,
+            type === 'period' && styles.periodContainer,
+            state === 'today' &&
+              (type == 'period' ? styles.todayPeriod : styles.today),
+            styles.monthlyCalendarItem,
           ]}>
-          {date?.day}
-        </Text>
+          <Text
+            style={[
+              (type === 'period' ||
+                (date?.dateString && symptomObj[date?.dateString])) &&
+                styles.periodText,
+              {fontWeight: state === 'today' ? '700' : '400'},
+            ]}>
+            {date?.day}
+          </Text>
+        </View>
+        {type == 'ovulation' && <BlueDropLet />}
+        {type == 'possible_period' && <Drop />}
       </View>
-      {date?.dateString && markedDates[date?.dateString] == 'fertility' && (
-        <BlueDropLet />
-      )}
-      {date?.dateString &&
-        markedDates[date?.dateString] == 'period' &&
-        date?.dateString >= today && <Drop />}
-      {date?.dateString && symptomObj[date?.dateString] && (
-        <View style={styles.symptomDot} />
-      )}
     </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
-  dropContainer: {
+  periodContainer: {
     backgroundColor: Theme.palette.onboarding.red,
     borderRadius: 0,
     borderBottomRightRadius: 16,
@@ -122,8 +134,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
+    opacity: 1,
   },
-  dropText: {
+  periodText: {
     fontStyle: 'normal',
     fontWeight: '400',
     fontSize: 15,
@@ -173,12 +186,44 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  todayPeriod: {
+    borderWidth: 1,
+    borderColor: Theme.palette.calendar.black,
+    opacity: 1,
+  },
   symptomDot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: Theme.palette.calendar.red,
-    marginTop: 2,
+    width: 10,
+    height: 10,
+    backgroundColor: Theme.palette.calendar.black,
+    borderBottomLeftRadius: 16,
+    borderTopRightRadius: 16,
+    borderTopLeftRadius: 16,
+    marginBottom: 8,
+    transform: [
+      {
+        rotate: '45deg',
+      },
+    ],
+  },
+  symptomContainer: {
+    backgroundColor: Theme.palette.onboarding.red,
+    borderRadius: 0,
+    borderBottomRightRadius: 16,
+    borderBottomLeftRadius: 16,
+    borderTopRightRadius: 16,
+    transform: [
+      {
+        rotate: '45deg',
+      },
+    ],
+    height: 24,
+    width: 24,
+    margin: 0,
+    padding: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    opacity: 0.3,
   },
 });
 export default CalendarMonth;
