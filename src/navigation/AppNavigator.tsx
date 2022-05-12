@@ -5,6 +5,8 @@ import BottomTabs from '../navigation/BottomTabs';
 import LoginScreen from '../screens/LoginScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Header from '../components/Header';
+import {ProfileScreen} from '../screens/ProfileScreen';
+import {Button} from '../components';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,12 +17,19 @@ export const AppNavigator = () => {
         <Stack.Screen
           name="Login"
           component={LoginScreen}
-          options={{header: () => <Header icon={false} />}}
+          options={{
+            header: () => <Header icon={false} />,
+          }}
         />
         <Stack.Screen
           name="Content"
           component={BottomTabs}
           options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{headerTitle: 'Профайл'}}
         />
       </Stack.Navigator>
     </SafeAreaView>

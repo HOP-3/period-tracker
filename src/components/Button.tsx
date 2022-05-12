@@ -1,5 +1,13 @@
 import React, {ReactNode} from 'react';
-import {View, StyleSheet, Pressable, PressableProps, Text} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Pressable,
+  PressableProps,
+  Text,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 import {Theme} from './theme';
 type ButtonType = PressableProps & {
   disabled?: boolean;
@@ -9,6 +17,7 @@ type ButtonType = PressableProps & {
   width?: number;
   height?: number;
   fontSize?: number;
+  styleButton?: StyleProp<ViewStyle>;
 };
 export const Button: React.FC<ButtonType> = ({
   onPress,
@@ -20,6 +29,7 @@ export const Button: React.FC<ButtonType> = ({
   width = 100,
   height = 50,
   fontSize = 17,
+  styleButton,
 }) => {
   return (
     <Pressable
@@ -33,10 +43,11 @@ export const Button: React.FC<ButtonType> = ({
         styles.button,
         disabled && styles.disabled,
         styles[type],
+        styleButton,
       ]}>
-      <View style={[styles.icon]}>{iconLeft}</View>
+      {iconLeft && <View style={[styles.icon]}>{iconLeft}</View>}
       <Text style={[{fontSize}, styles[type]]}>{children}</Text>
-      <View style={[styles.icon]}>{iconRight}</View>
+      {iconRight && <View style={[styles.icon]}>{iconRight}</View>}
     </Pressable>
   );
 };
@@ -45,11 +56,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 4,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     borderWidth: 1,
   },
   icon: {
-    marginHorizontal: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },

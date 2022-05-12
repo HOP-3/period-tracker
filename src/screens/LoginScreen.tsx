@@ -72,11 +72,16 @@ export const LoginScreen = () => {
           <ImageBackground
             source={require('../assets/images/circles.png')}
             // eslint-disable-next-line react-native/no-inline-styles
-            style={{height: '100%', width: '100%', justifyContent: 'flex-end'}}>
+            style={{
+              height: '100%',
+              width: '100%',
+              justifyContent: 'flex-end',
+              overflow: 'hidden',
+            }}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
               <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                keyboardVerticalOffset={200}
+                keyboardVerticalOffset={300}
                 style={style.inputCircle}>
                 <View style={style.inputContainer}>
                   {confirm ? (
@@ -93,7 +98,10 @@ export const LoginScreen = () => {
                           inputType="number-pad"
                         />
                       </View>
-                      <Button width={width - 50} onPress={confirmCode}>
+                      <Button
+                        width={width - 50}
+                        onPress={confirmCode}
+                        styleButton={{marginTop: 50}}>
                         Нэвтрэх
                       </Button>
                     </>
@@ -113,11 +121,19 @@ export const LoginScreen = () => {
                       </View>
                       <Button
                         width={width - 50}
-                        onPress={signInWithPhoneNumber}>
+                        onPress={signInWithPhoneNumber}
+                        styleButton={{marginTop: 50}}>
                         Нэвтрэх
                       </Button>
                     </>
                   )}
+                  <Button
+                    width={width - 50}
+                    onPress={() => navigation.pop()}
+                    type={'secondary'}
+                    styleButton={{marginTop: 10}}>
+                    Буцах
+                  </Button>
 
                   {/* <Text>Эсвэл</Text> */}
                   {/* <View>
@@ -177,10 +193,11 @@ const style = StyleSheet.create({
     borderTopRightRadius: 1000,
     borderTopLeftRadius: 1000,
     alignItems: 'center',
+    // justifyContent: 'center',
     padding: 60,
   },
   inputContainer: {
-    justifyContent: 'space-evenly',
+    // justifyContent: 'space-around',
     flex: 1,
   },
   label: {
