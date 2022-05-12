@@ -88,7 +88,7 @@ export const LoginScreen = () => {
                           setText={setCode}
                           width={width - 50}
                           height={50}
-                          placeholder={'Утасны дугаар'}
+                          placeholder={'Баталгаажуулах код'}
                           type="codeConfirmation"
                           inputType="number-pad"
                         />

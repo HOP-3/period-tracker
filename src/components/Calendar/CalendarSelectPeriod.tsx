@@ -2,8 +2,8 @@ import React, {useContext, useMemo} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {CalendarList, LocaleConfig} from 'react-native-calendars';
 
-import {Context} from '../providers/Provider';
-import {Theme} from './theme';
+import {Context} from '../../providers/Provider';
+import {Theme} from '../theme';
 
 type CalendarSelectPropsType = {
   markedDates: string[];
