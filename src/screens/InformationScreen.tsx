@@ -1,5 +1,15 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, FlatList, Pressable} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Pressable,
+  ScrollView,
+  SectionList,
+  Dimensions,
+  Image,
+} from 'react-native';
 
 import {Theme} from '../components/theme';
 
@@ -13,6 +23,8 @@ type adviceType = {
   }[];
 };
 
+const width = Dimensions.get('window').width;
+
 export const InformationScreen = () => {
   const adviceHeaders = [
     'Бүгд',
@@ -25,38 +37,50 @@ export const InformationScreen = () => {
         <FlatList
           contentContainerStyle={styles.filterContainer}
           data={adviceHeaders}
-          renderItem={({item}) => {
-            return (
-              <Pressable
-                style={[
-                  styles.center,
-                  styles.filterItem,
-                  selected === item && styles.filterItemSelected,
-                ]}
-                onPress={() => setSelected(item)}>
-                <Text>{item}</Text>
-              </Pressable>
-            );
-          }}
+          renderItem={({item}) => (
+            <Pressable
+              style={[
+                styles.center,
+                styles.filterItem,
+                selected === item && styles.filterItemSelected,
+              ]}
+              onPress={() => setSelected(item)}>
+              <Text>{item}</Text>
+            </Pressable>
+          )}
           keyExtractor={(_, index) => index.toString()}
           horizontal
           showsHorizontalScrollIndicator={false}
         />
       </View>
-      {selected == 'Бүгд' ? (
-        <View>
-          {advice.map((item: adviceType) => {
-            return (
+
+      <ScrollView style={styles.colContainer}>
+        {selected == 'Бүгд' ? (
+          <View>
+            {/* <SectionList
+            sections={advice}
+            keyExtractor={(item, index) => item.title + index.toString()}
+            stickySectionHeadersEnabled={false}
+            renderItem={({item}) => (
               <View>
-                <Text>{item.name}</Text>
+                <Text>{item.title}</Text>
+                <Text>{item.imageUrl}</Text>
+              </View>
+            )}
+            renderSectionHeader={({section}) => <Text>{section.name}</Text>}
+          /> */}
+            {advice.map((item: adviceType, index) => (
+              <View key={index}>
+                <Text style={[styles.rowHeader, styles.mh8]}>{item.name}</Text>
                 <FlatList
-                  contentContainerStyle={styles.filterContainer}
+                  pagingEnabled={true}
+                  contentContainerStyle={styles.adviceContainer}
                   data={item.data}
                   renderItem={({item}) => {
                     return (
-                      <Pressable>
-                        <Text>{item.title}</Text>
-                      </Pressable>
+                      <View style={styles.mh8}>
+                        <InfoItem title={item.title} imageUrl={item.imageUrl} />
+                      </View>
                     );
                   }}
                   keyExtractor={(_, index) => index.toString()}
@@ -64,27 +88,57 @@ export const InformationScreen = () => {
                   showsHorizontalScrollIndicator={false}
                 />
               </View>
-            );
-          })}
-        </View>
-      ) : (
-        <Information selected={selected} />
-      )}
+            ))}
+          </View>
+        ) : (
+          <Information selected={selected} />
+        )}
+      </ScrollView>
     </View>
   );
 };
 const Information = ({selected}: {selected: string}) => {
   const data = advice.filter((item: adviceType) => item.name === selected);
-  console.log(data.length == 1 && data[0].data);
   return (
     <View>
-      <Text>{selected}</Text>
-      <FlatList
-        data={data.length == 1 ? data[0].data : []}
-        renderItem={dt => {
-          return <Text>{dt.item.title}</Text>;
-        }}
-      />
+      <Text style={styles.rowHeader}>{selected}</Text>
+      <ScrollView style={styles.rowContainer}>
+        {data[0].data.map((item: any, index: number) => (
+          <View style={{paddingVertical: 8}} key={item.title}>
+            <InfoItem key={index} title={item.title} imageUrl={item.imageUrl} />
+          </View>
+        ))}
+      </ScrollView>
+    </View>
+  );
+};
+const InfoItem = ({title, imageUrl}: {title: string; imageUrl: string}) => {
+  return (
+    <View style={styles.infoContainer}>
+      <Text style={styles.infoText}>{title}</Text>
+      <View style={styles.infoImageContainer}>
+        <View
+          style={{
+            borderTopRightRadius: (width - 48) / 4,
+            borderTopLeftRadius: (width - 48) / 4,
+            height: (width - 48) / 2,
+            width: (width - 48) / 2,
+            borderWidth: 4,
+            borderColor: '#FF7C76',
+            overflow: 'hidden',
+          }}>
+          <View
+            style={{
+              borderTopRightRadius: (width - 48) / 4,
+              borderTopLeftRadius: (width - 48) / 4,
+              height: (width - 48) / 2 - 8,
+              width: (width - 48) / 2 - 8,
+              overflow: 'hidden',
+            }}>
+            <Image source={{uri: imageUrl}} style={styles.infoImage} />
+          </View>
+        </View>
+      </View>
     </View>
   );
 };
@@ -119,5 +173,63 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  colContainer: {
+    padding: 24,
+    flex: 1,
+    fontFamily: 'Open Sans',
+  },
+  rowContainer: {
+    flexDirection: 'row',
+  },
+  infoContainer: {
+    padding: 16,
+    height: 136,
+    width: width - 64,
+    position: 'relative',
+    borderWidth: 1,
+    borderColor: '#EAEAEA',
+    overflow: 'hidden',
+    borderRadius: 4,
+  },
+  infoImageContainer: {
+    borderTopRightRadius: (width - 48) / 4,
+    borderTopLeftRadius: (width - 48) / 4,
+    height: (width - 48) / 2,
+    width: (width - 48) / 2,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: -(width - 48) / 4 - 4,
+    right: -10,
+  },
+  infoImage: {
+    height: (width - 48) / 4 - 8,
+    width: (width - 48) / 2 - 8,
+  },
+  infoText: {
+    width: (width - 48) / 2,
+    fontFamily: 'Open Sans',
+    fontStyle: 'normal',
+    fontWeight: '700',
+    fontSize: 14,
+    lineHeight: 19,
+    color: '#333333',
+  },
+  adviceContainer: {
+    paddingBottom: 48,
+    paddingTop: 12,
+  },
+  rowHeader: {
+    fontFamily: 'Open Sans',
+    fontStyle: 'normal',
+    fontWeight: '700',
+    fontSize: 14,
+    lineHeight: 19,
+    textTransform: 'uppercase',
+    color: '#000000',
+  },
+  mh8: {
+    marginHorizontal: 8,
+  },
 });
+
 export default InformationScreen;

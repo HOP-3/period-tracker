@@ -13,7 +13,7 @@ export const Theme = {
     },
     calendar: {
       blue: '#13ABC7',
-      red: '#FF7C76',
+      red: '#EDB3AD',
       black: '#303030',
     },
     advice: {

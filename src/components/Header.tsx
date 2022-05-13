@@ -1,9 +1,10 @@
 import React from 'react';
 import {View, StyleSheet, Pressable} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+
 import Notification from '../assets/svgs/notification.svg';
 import User from '../assets/svgs/user.svg';
 import Logo from '../assets/svgs/logo.svg';
-import {useNavigation} from '@react-navigation/native';
 
 type HeaderType = {
   icon?: boolean;
@@ -11,8 +12,6 @@ type HeaderType = {
 
 const Header: React.FC<HeaderType> = ({icon = true}) => {
   const navigation = useNavigation<any>();
-
-  console.log(navigation);
   return (
     <View style={icon ? styles.container : styles.icon}>
       <Logo />
