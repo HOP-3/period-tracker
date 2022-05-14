@@ -92,6 +92,11 @@ export const AppNavigator = () => {
           component={StoryScreen}
           options={{headerShown: false}}
         />
+        <Stack.Screen
+          name="Story"
+          component={StoryScreen}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </SafeAreaView>
   );
