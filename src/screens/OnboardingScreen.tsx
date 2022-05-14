@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 
 import {Button} from '../components';
+import {Theme} from '../components/theme';
 
 type DataType = {
   description: string;
@@ -85,7 +86,9 @@ export const OnBoarding = () => {
             key={index}
             style={[
               styles.dot,
-              index === imageIndex && {backgroundColor: 'red'},
+              index === imageIndex && {
+                backgroundColor: Theme.palette.primary.red,
+              },
             ]}
           />
         ))}

@@ -155,7 +155,7 @@ const CalendarYearItem = ({
 
 const styles = StyleSheet.create({
   header: {
-    // fontFamily: 'Open Sans',
+    fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: '700',
     fontSize: 20,
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     width: (width - 48) / 2,
   },
   calendarItemHeader: {
-    // font-family: 'Open Sans';
+    fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontSize: 16,
     lineHeight: 16,
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     display: 'none',
   },
   ovulation: {
-    // fontFamily: 'Open Sans',
+    fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: '700',
     fontSize: 12,
