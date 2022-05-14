@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, FlatList, StyleSheet} from 'react-native';
-import EmptyNotif from '../assets/svgs/emptyNotif.svg';
+import EmptyNotif from '../assets/svgs/emptyNotifIcon.svg';
 
 type dataType = {
   notif: string;
