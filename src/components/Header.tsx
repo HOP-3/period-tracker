@@ -17,7 +17,9 @@ const Header: React.FC<HeaderType> = ({icon = true}) => {
       <Logo />
       {icon && (
         <View style={{flexDirection: 'row'}}>
-          <Notification style={{marginRight: 10}} />
+          <Pressable onPress={() => navigation.navigate('Notification')}>
+            <Notification style={{marginRight: 10}} />
+          </Pressable>
           <Pressable
             onPress={() => {
               navigation.navigate('Profile');
