@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "639411328803",
+    "project_id": "period-tracker-4841e",
+    "storage_bucket": "period-tracker-4841e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639411328803:android:983eeaa5b603414a351e96",
+        "android_client_info": {
+          "package_name": "com.periodtracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "639411328803-6l96cq7ojks8um82plt9k6bkqhb3gj8t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAo1Jwd-mFE4E88dwmsvRJ-YQeP98s40DQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "639411328803-6l96cq7ojks8um82plt9k6bkqhb3gj8t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "639411328803-m0clhohdogn505uo0atk43rve03ocj1o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.PeriodTracker"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
