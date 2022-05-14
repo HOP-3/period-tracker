@@ -1,3 +1,4 @@
+import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {
   View,
@@ -6,14 +7,14 @@ import {
   FlatList,
   Pressable,
   ScrollView,
-  SectionList,
   Dimensions,
   Image,
 } from 'react-native';
 
 import {Theme} from '../components/theme';
-
+import {RootStackParamList} from './types';
 import advice from '../mock_data/advice.json';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 type adviceType = {
   name: string;
@@ -55,7 +56,7 @@ export const InformationScreen = () => {
       </View>
 
       <ScrollView style={styles.colContainer}>
-        {selected == 'Бүгд' ? (
+        {selected === 'Бүгд' ? (
           <View>
             {/* <SectionList
             sections={advice}
@@ -99,22 +100,40 @@ export const InformationScreen = () => {
 };
 const Information = ({selected}: {selected: string}) => {
   const data = advice.filter((item: adviceType) => item.name === selected);
+
   return (
     <View>
       <Text style={styles.rowHeader}>{selected}</Text>
       <ScrollView style={styles.rowContainer}>
         {data[0].data.map((item: any, index: number) => (
           <View style={{paddingVertical: 8}} key={item.title}>
-            <InfoItem key={index} title={item.title} imageUrl={item.imageUrl} />
+            <InfoItem
+              key={index}
+              title={item.title}
+              imageUrl={item.imageUrl}
+              story={item.story}
+            />
           </View>
         ))}
       </ScrollView>
     </View>
   );
 };
-const InfoItem = ({title, imageUrl}: {title: string; imageUrl: string}) => {
+const InfoItem = ({
+  title,
+  imageUrl,
+  story = [],
+}: {
+  title: string;
+  imageUrl: string;
+  story?: string[];
+}) => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   return (
-    <View style={styles.infoContainer}>
+    <Pressable
+      style={styles.infoContainer}
+      onPress={() => navigation.navigate('Story', {images: story})}>
       <Text style={styles.infoText}>{title}</Text>
       <View style={styles.infoImageContainer}>
         <View
@@ -139,7 +158,7 @@ const InfoItem = ({title, imageUrl}: {title: string; imageUrl: string}) => {
           </View>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 const styles = StyleSheet.create({

@@ -4,7 +4,11 @@
     "data": [
       {
         "imageUrl": "http://cdn.shopify.com/s/files/1/0066/7569/3639/articles/vitamin-c-benefits.jpg?v=1623791337",
-        "title": "С амин дэмийн талаар чиний мэдэх ёстой бүхэн"
+        "title": "С амин дэмийн талаар чиний мэдэх ёстой бүхэн",
+        "story": [
+          "storyCard1.png",
+          "storyCard1.png"
+        ]
       },
       {
         "imageUrl": "https://imageio.forbes.com/specials-images/imageserve/5fea5a330b6c5fc03433421f/Mixed-Race-Woman-Applying-Face-Cream--Here-s-the-truth-behind-11-skincare-myths-/960x0.jpg?fit=bounds&format=jpg&width=960",

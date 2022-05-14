@@ -4,12 +4,12 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import BottomTabs from '../navigation/BottomTabs';
 import LoginScreen from '../screens/LoginScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Action, OnBoarding} from '../screens';
+import {Action, OnBoarding, StoryScreen} from '../screens';
 import Header from '../components/Header';
 import {ProfileScreen} from '../screens/ProfileScreen';
 import {NotificationScreen} from '../screens/NotificationScreen';
 import BackButton from '../assets/svgs/backButton.svg';
-import {Dimensions, Pressable, View} from 'react-native';
+import {Dimensions, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Context} from '../providers/Provider';
 
@@ -21,7 +21,7 @@ const height = Dimensions.get('window').height;
 export const AppNavigator = () => {
   const navigation = useNavigation<any>();
   const {modalBackground, setModalBackground, firstTime} = useContext(Context);
- 
+
   return (
     <SafeAreaView style={{flex: 1}}>
       {modalBackground && (
@@ -86,6 +86,11 @@ export const AppNavigator = () => {
               </Pressable>
             ),
           }}
+        />
+        <Stack.Screen
+          name="Story"
+          component={StoryScreen}
+          options={{headerShown: false}}
         />
       </Stack.Navigator>
     </SafeAreaView>

@@ -6,4 +6,7 @@ export type RootStackParamList = {
   Login: undefined;
   ProfileScreen: undefined;
   Action: undefined;
+  Story: {
+    images: string[];
+  };
 };
