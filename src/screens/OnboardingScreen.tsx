@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../screens/types';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -12,6 +12,7 @@ import {
   StyleSheet,
   Pressable,
   Dimensions,
+  Animated,
 } from 'react-native';
 
 import {Button} from '../components';
@@ -26,11 +27,13 @@ type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 export const OnBoarding = () => {
   const navigation = useNavigation<NavigationProps>();
   const [imageIndex, setImageIndex] = useState(0);
-
+  const fadeAnim = useRef(new Animated.Value(1)).current;
   const indexPlus = () => {
     if (imageIndex + 1 === data.length) {
       navigation.navigate('Content');
     } else {
+      fadeOut();
+
       setImageIndex(imageIndex + 1);
     }
   };
@@ -66,6 +69,26 @@ export const OnBoarding = () => {
       title: 'Аяллаа хамтдаа эхэлцгээе!',
     },
   ];
+  const fadeIn = () => {
+    // Will change fadeAnim value to 1 in 5 seconds
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+  const fadeOut = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 100,
+      useNativeDriver: true,
+    }).start()
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  };
 
   return (
     <View style={styles.container}>
@@ -77,9 +100,12 @@ export const OnBoarding = () => {
           Алгасах
         </Button>
       </View>
-      <Image source={imageData[imageIndex]} />
-      <Text style={styles.title}>{data[imageIndex].title}</Text>
-      <Text style={styles.description}>{data[imageIndex].description}</Text>
+      {/* <Image source={imageData[imageIndex]} /> */}
+      <Animated.View style={{opacity: fadeAnim}}>
+        <Text style={styles.title}>{data[imageIndex].title}</Text>
+        <Text style={styles.description}>{data[imageIndex].description}</Text>
+      </Animated.View>
+
       <View style={{flexDirection: 'row', justifyContent: 'center'}}>
         {imageData.map((_, index) => (
           <View
