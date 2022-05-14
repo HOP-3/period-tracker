@@ -7,10 +7,15 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {OnBoarding} from '../screens';
 import Header from '../components/Header';
 import {ProfileScreen} from '../screens/ProfileScreen';
+import {NotificationScreen} from '../screens/NotificationScreen';
+import BackButton from '../assets/svgs/backButton.svg';
+import {Pressable} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 
 export const AppNavigator = () => {
+  const navigation = useNavigation<any>();
   return (
     <SafeAreaView style={{flex: 1}}>
       <Stack.Navigator initialRouteName="OnBoarding">
@@ -34,7 +39,26 @@ export const AppNavigator = () => {
         <Stack.Screen
           name="Profile"
           component={ProfileScreen}
-          options={{headerTitle: 'Профайл'}}
+          options={{
+            headerTitle: 'Профайл',
+            headerLeft: () => (
+              <Pressable onPress={() => navigation.goBack()}>
+                <BackButton height={30} width={30} />
+              </Pressable>
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="Notification"
+          component={NotificationScreen}
+          options={{
+            headerTitle: 'Мэдэгдэл',
+            headerLeft: () => (
+              <Pressable onPress={() => navigation.goBack()}>
+                <BackButton height={30} width={30} />
+              </Pressable>
+            ),
+          }}
         />
       </Stack.Navigator>
     </SafeAreaView>
