@@ -140,21 +140,21 @@ export const LoginScreen = () => {
                     Буцах
                   </Button>
 
-                  {/* <Text>Эсвэл</Text> */}
-                  {/* <View>
-                  <Button
-                    width={width - 50}
-                    type={'secondary'}
-                    iconRight={<Facebook />}>
-                    Facebook -ээр нэвтрэх
-                  </Button>
-                  <Button
-                    width={width - 50}
-                    type={'secondary'}
-                    iconRight={<Google />}>
-                    Google -ээр нэвтрэх
-                  </Button>
-                </View> */}
+                  {/* <Text>Эсвэл</Text>
+                  <View>
+                    <Button
+                      width={width - 50}
+                      type={'secondary'}
+                      iconRight={<Facebook />}>
+                      Facebook -ээр нэвтрэх
+                    </Button>
+                    <Button
+                      width={width - 50}
+                      type={'secondary'}
+                      iconRight={<Google />}>
+                      Google -ээр нэвтрэх
+                    </Button>
+                  </View> */}
                 </View>
               </KeyboardAvoidingView>
             </TouchableWithoutFeedback>

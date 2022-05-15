@@ -27,7 +27,7 @@ const BottomTabs = () => {
   const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="Нүүр"
       screenOptions={({route}) => ({
         tabBarStyle: {height: 50, paddingBottom: 0},
         tabBarActiveTintColor: Theme.palette.calendar.red,

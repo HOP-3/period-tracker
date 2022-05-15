@@ -4,11 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {AppNavigator} from './navigation/AppNavigator';
 import {AuthProvider} from './providers/AuthProvider';
 import {Provider} from './providers/Provider';
-import SplashScreen from 'react-native-splash-screen';
 const App = () => {
-  useEffect(() => {
-    SplashScreen.hide();
-  }, []);
   return (
     <NavigationContainer>
       <SafeAreaProvider>
