@@ -1,14 +1,21 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {StyleSheet, ScrollView} from 'react-native';
 import {SymptomModal} from '../components';
+import {Theme} from '../components/theme';
 
 export const HomeScreen = () => {
   return (
-    <View>
-      <Text>Home</Text>
+    <ScrollView style={styles.container}>
       <SymptomModal />
-    </View>
+    </ScrollView>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 24,
+    backgroundColor: Theme.palette.onboarding.white,
+  },
+});
 
 export default HomeScreen;
