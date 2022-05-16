@@ -13,6 +13,7 @@ import {
   Pressable,
   Dimensions,
   Animated,
+  Easing,
 } from 'react-native';
 
 import {Button} from '../components';
@@ -38,7 +39,7 @@ export const OnBoarding = () => {
     if (imageIndex + 1 === data.length) {
       navigation.navigate('Content');
     } else {
-      imageAnimationP();
+      // imageAnimationP();
       textAnimation();
       setImageIndex(imageIndex + 1);
     }
@@ -82,44 +83,46 @@ export const OnBoarding = () => {
       Animated.timing(fadeAnim, {
         toValue: 0,
         duration: 200,
+
         useNativeDriver: true,
       }),
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 600,
+
         useNativeDriver: true,
       }),
     ]).start();
   };
-  const imageAnimationP = () => {
-    console.log(imageIndex);
-    Animated.parallel([
-      Animated.timing(translation, {
-        toValue: {
-          x: imageIndex === 0 ? -800 : imageIndex === 1 ? 0 : 800,
-          y: imageIndex === 0 ? 100 : imageIndex === 1 ? 1000 : -100,
-        },
-        duration: 500,
-        useNativeDriver: true,
-      }),
-      Animated.timing(translation1, {
-        toValue: {
-          x: imageIndex === 0 ? 0 : imageIndex === 1 ? -800 : 0,
-          y: imageIndex === 0 ? -370 : imageIndex === 1 ? 100 : 1000,
-        },
-        duration: 500,
-        useNativeDriver: true,
-      }),
-      Animated.timing(translation2, {
-        toValue: {
-          x: imageIndex === 0 ? 800 : imageIndex === 1 ? 0 : -800,
-          y: imageIndex === 0 ? -370 : imageIndex === 1 ? -740 : 100,
-        },
-        duration: 500,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  };
+  // const imageAnimationP = () => {
+  //   console.log(imageIndex);
+  //   Animated.parallel([
+  //     Animated.timing(translation, {
+  //       toValue: {
+  //         x: imageIndex === 0 ? -800 : imageIndex === 1 ? 0 : 800,
+  //         y: imageIndex === 0 ? 100 : imageIndex === 1 ? 1000 : -100,
+  //       },
+  //       duration: 500,
+  //       useNativeDriver: true,
+  //     }),
+  //     Animated.timing(translation1, {
+  //       toValue: {
+  //         x: imageIndex === 0 ? 0 : imageIndex === 1 ? -800 : 0,
+  //         y: imageIndex === 0 ? -370 : imageIndex === 1 ? 100 : 1000,
+  //       },
+  //       duration: 500,
+  //       useNativeDriver: true,
+  //     }),
+  //     Animated.timing(translation2, {
+  //       toValue: {
+  //         x: imageIndex === 0 ? 800 : imageIndex === 1 ? 0 : -800,
+  //         y: imageIndex === 0 ? -370 : imageIndex === 1 ? -740 : 100,
+  //       },
+  //       duration: 500,
+  //       useNativeDriver: true,
+  //     }),
+  //   ]).start();
+  // };
   const imageAnimationN = () => {
     Animated.parallel([
       Animated.timing(translation1, {
@@ -145,7 +148,7 @@ export const OnBoarding = () => {
         </Button>
       </View>
       <View style={{maxHeight: 380, borderWidth: 1}}>
-        <Animated.Image
+        {/* <Animated.Image
           style={{
             transform: [
               {translateX: translation.x},
@@ -172,7 +175,7 @@ export const OnBoarding = () => {
             ],
           }}
           source={require('../assets/pngs/third.png')}
-        />
+        /> */}
       </View>
 
       {/* <Image source={imageData[imageIndex]} /> */}
