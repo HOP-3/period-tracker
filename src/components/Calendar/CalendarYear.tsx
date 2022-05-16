@@ -78,7 +78,13 @@ export const CalendarYear = ({isVisible, markedDates}: CalendarPropsType) => {
     '12',
   ];
   return (
-    <ScrollView style={[isVisible ? styles.visible : styles.hidden]}>
+    <ScrollView
+      style={[
+        isVisible ? styles.visible : styles.hidden,
+        {
+          flex: 1,
+        },
+      ]}>
       <View style={[styles.calendarYearContainer, styles.center]}>
         {new Array(12).fill(0).map((_, index) => {
           let str = year + '-' + months[index] + '-01';
@@ -226,7 +232,6 @@ const styles = StyleSheet.create({
     marginRight: 16,
     marginLeft: 16,
     flexWrap: 'wrap',
-    marginBottom: 24,
   },
 });
 

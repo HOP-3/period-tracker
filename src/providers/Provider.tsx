@@ -24,6 +24,8 @@ type ContextType = {
   year: number | null;
   symptoms: SymptomType[];
   symptomObj: SymptomObjType;
+  modalBackground: boolean;
+  setModalBackground: (value: boolean) => void;
 };
 
 export const Context = createContext<ContextType>({
@@ -32,9 +34,12 @@ export const Context = createContext<ContextType>({
   year: null,
   symptoms: [],
   symptomObj: {},
+  modalBackground: false,
+  setModalBackground: () => {},
 });
 
 export const Provider = ({children}: any) => {
+  const [modalBackground, setModalBackground] = useState(false);
   const date = new Date();
   const year = date.getFullYear();
   const month =
@@ -69,7 +74,16 @@ export const Provider = ({children}: any) => {
     getData();
   }, [userId]);
   return (
-    <Context.Provider value={{today, month, year, symptoms, symptomObj}}>
+    <Context.Provider
+      value={{
+        today,
+        month,
+        year,
+        symptoms,
+        symptomObj,
+        modalBackground,
+        setModalBackground,
+      }}>
       {children}
     </Context.Provider>
   );
