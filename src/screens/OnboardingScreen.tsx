@@ -30,11 +30,23 @@ export const OnBoarding = () => {
   const navigation = useNavigation<NavigationProps>();
   const [imageIndex, setImageIndex] = useState(0);
   const fadeAnim = useRef(new Animated.Value(1)).current;
-  const translation = useRef(new Animated.ValueXY({x: 0, y: 0})).current;
-  const translation1 = useRef(new Animated.ValueXY({x: 800, y: -100})).current;
-  const translation2 = useRef(new Animated.ValueXY({x: 0, y: 1000})).current;
-  const translation3 = useRef(new Animated.ValueXY({x: -800, y: 100})).current;
 
+  let rotateValueHolder = useRef(new Animated.Value(0)).current;
+
+  const startImageRotateFunction = () => {
+    rotateValueHolder.setValue(0);
+    Animated.timing(rotateValueHolder, {
+      toValue: 1,
+      duration: 3000,
+      easing: Easing.linear,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const rotateData = rotateValueHolder.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+  });
   const indexPlus = () => {
     if (imageIndex + 1 === data.length) {
       navigation.navigate('Content');
@@ -45,7 +57,7 @@ export const OnBoarding = () => {
     }
   };
   const indexMinus = () => {
-    imageAnimationN();
+    // imageAnimationN();
     textAnimation();
     setImageIndex(imageIndex - 1);
   };
@@ -94,49 +106,7 @@ export const OnBoarding = () => {
       }),
     ]).start();
   };
-  // const imageAnimationP = () => {
-  //   console.log(imageIndex);
-  //   Animated.parallel([
-  //     Animated.timing(translation, {
-  //       toValue: {
-  //         x: imageIndex === 0 ? -800 : imageIndex === 1 ? 0 : 800,
-  //         y: imageIndex === 0 ? 100 : imageIndex === 1 ? 1000 : -100,
-  //       },
-  //       duration: 500,
-  //       useNativeDriver: true,
-  //     }),
-  //     Animated.timing(translation1, {
-  //       toValue: {
-  //         x: imageIndex === 0 ? 0 : imageIndex === 1 ? -800 : 0,
-  //         y: imageIndex === 0 ? -370 : imageIndex === 1 ? 100 : 1000,
-  //       },
-  //       duration: 500,
-  //       useNativeDriver: true,
-  //     }),
-  //     Animated.timing(translation2, {
-  //       toValue: {
-  //         x: imageIndex === 0 ? 800 : imageIndex === 1 ? 0 : -800,
-  //         y: imageIndex === 0 ? -370 : imageIndex === 1 ? -740 : 100,
-  //       },
-  //       duration: 500,
-  //       useNativeDriver: true,
-  //     }),
-  //   ]).start();
-  // };
-  const imageAnimationN = () => {
-    Animated.parallel([
-      Animated.timing(translation1, {
-        toValue: {x: 400, y: -200},
-        duration: 500,
-        useNativeDriver: true,
-      }),
-      Animated.timing(translation, {
-        toValue: {x: 0, y: 0},
-        duration: 500,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  };
+
   return (
     <View style={styles.container}>
       <View style={{alignSelf: 'flex-end', marginRight: 10}}>
@@ -147,35 +117,9 @@ export const OnBoarding = () => {
           Алгасах
         </Button>
       </View>
-      <View style={{maxHeight: 380, borderWidth: 1}}>
-        {/* <Animated.Image
-          style={{
-            transform: [
-              {translateX: translation.x},
-              {translateY: translation.y},
-            ],
-          }}
-          source={require('../assets/pngs/first.png')}
-        />
-
-        <Animated.Image
-          source={require('../assets/pngs/second.png')}
-          style={{
-            transform: [
-              {translateX: translation1.x},
-              {translateY: translation1.y},
-            ],
-          }}
-        />
-        <Animated.Image
-          style={{
-            transform: [
-              {translateX: translation2.x},
-              {translateY: translation2.y},
-            ],
-          }}
-          source={require('../assets/pngs/third.png')}
-        /> */}
+      <View style={{transform: [{rotate: rotateData}]}}>
+        <View style={styles.symbol} />
+        <View style={styles.symbol1} />
       </View>
 
       {/* <Image source={imageData[imageIndex]} /> */}
@@ -238,6 +182,30 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     textAlign: 'center',
     letterSpacing: 0.5,
+  },
+  circle: {
+    width: 100,
+    height: 100,
+    borderRadius: 100 / 2,
+    backgroundColor: 'red',
+  },
+  symbol: {
+    width: 16,
+    height: 16,
+    borderRadius: 16 / 2,
+    backgroundColor: 'green',
+    position: 'absolute',
+    right: 8,
+    bottom: 8,
+  },
+  symbol1: {
+    width: 16,
+    height: 16,
+    borderRadius: 16 / 2,
+    backgroundColor: 'green',
+    position: 'absolute',
+    left: 8,
+    bottom: 8,
   },
 });
 
