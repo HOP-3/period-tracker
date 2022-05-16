@@ -14,10 +14,10 @@ export const CalendarSelectPeriod = ({
   markedDates,
   setMarkedDates,
 }: CalendarSelectPropsType) => {
-  const {month} = useContext(Context);
+  const {month, today} = useContext(Context);
   const periodDates = useMemo(() => {
     return new Set(markedDates);
-  }, []);
+  }, [markedDates]);
   return (
     <CalendarList
       markingType={'custom'}
@@ -25,6 +25,9 @@ export const CalendarSelectPeriod = ({
       dayComponent={({date}) => (
         <Pressable
           onPress={() => {
+            if (date && date?.dateString > today) {
+              return;
+            }
             let dates = periodDates;
             if (date?.dateString) {
               if (dates.has(date.dateString)) {
@@ -41,8 +44,15 @@ export const CalendarSelectPeriod = ({
               ? styles.container
               : styles.containerDisabled,
             styles.dayComponent,
+            date && date?.dateString > today && styles.disabledPeriodDay,
           ]}>
-          <Text style={styles.text}>{date?.day}</Text>
+          <Text
+            style={[
+              styles.text,
+              date && date?.dateString == today && styles.bold,
+            ]}>
+            {date?.day}
+          </Text>
         </Pressable>
       )}
       renderHeader={date => (
@@ -139,5 +149,11 @@ const styles = StyleSheet.create({
   },
   dayComponent: {
     height: 24,
+  },
+  disabledPeriodDay: {
+    opacity: 0.5,
+  },
+  bold: {
+    fontWeight: 'bold',
   },
 });

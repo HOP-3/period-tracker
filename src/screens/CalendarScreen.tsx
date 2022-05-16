@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useMemo, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,8 +7,8 @@ import {
   Modal,
   Dimensions,
   SafeAreaView,
+  Image,
 } from 'react-native';
-
 import {Button} from '../components';
 import {
   CalendarYear,
@@ -19,6 +19,7 @@ import {
 import {Theme} from '../components/theme';
 
 import Close from '../assets/svgs/exit.svg';
+
 import {Context} from '../providers/Provider';
 
 type MarkedDatesType = {
@@ -64,6 +65,10 @@ export const CalendarScreen = () => {
   return (
     <View style={[styles.col, styles.container]}>
       <View style={[styles.col, styles.center]}>
+        <Image
+          source={require('../assets/images/Rectangle.png')}
+          style={styles.headerImage}
+        />
         <View style={[styles.row, styles.center, styles.header]}>
           <Pressable
             style={[
@@ -86,17 +91,15 @@ export const CalendarScreen = () => {
         </View>
       </View>
       <View
-        style={{
-          flexDirection: 'row',
-          marginHorizontal: 15,
-          paddingVertical: 10,
-          borderBottomWidth: 1,
-          borderBottomColor: 'rgba(0,0,0,0.05)',
-          display: isMonth ? 'flex' : 'none',
-        }}>
+        style={[
+          {
+            display: isMonth ? 'flex' : 'none',
+          },
+          styles.weekendContainer,
+        ]}>
         {day.map((item, index) => {
           return (
-            <View key={index} style={{}}>
+            <View key={index} style={styles.flexCenter}>
               <Text
                 style={{
                   color: index < 5 ? '#767676' : '#FF7C76',
@@ -143,6 +146,15 @@ const CalendarEditModal = ({
   setVisible: (visible: boolean) => void;
 }) => {
   const {setModalBackground} = useContext(Context);
+  const ovulations = useMemo(() => {
+    const ovulations: string[] = [];
+    Object.keys(markedDates).forEach(key => {
+      if (markedDates[key] === 'ovulation') {
+        ovulations.push(key);
+      }
+    });
+    return ovulations;
+  }, [markedDates]);
   const [markedArray, setMarkedArray] = useState<string[]>(() => {
     let key = Object.keys(markedDates);
     let arr = [];
@@ -156,28 +168,16 @@ const CalendarEditModal = ({
   return (
     <SafeAreaView style={styles.modalContainer}>
       <Pressable
-        style={{
-          height: (height / 10) * 3,
-          width: width,
-        }}
+        style={styles.modalContainerTop}
         onPress={() => {
           setModalBackground(false);
           setVisible(false);
         }}
       />
-      <View
-        style={{
-          height: (height / 10) * 7,
-          width: width,
-          zIndex: 7,
-        }}>
+      <View style={styles.modalContainerBottom}>
         <View style={styles.modalHeader}>
           <Pressable
-            style={{
-              position: 'absolute',
-              right: 12,
-              top: 12,
-            }}
+            style={styles.modalClose}
             onPress={() => {
               setModalBackground(false);
               setVisible(false);
@@ -200,11 +200,7 @@ const CalendarEditModal = ({
             );
           })}
         </View>
-        <View
-          style={{
-            paddingBottom: 128,
-            backgroundColor: '#fff',
-          }}>
+        <View style={styles.selectPeriodContainer}>
           <CalendarSelectPeriod
             markedDates={markedArray}
             setMarkedDates={(arr: string[]) => {
@@ -221,6 +217,9 @@ const CalendarEditModal = ({
               let newMarkedDates: MarkedDatesType = {};
               for (let i = 0; i < markedArray.length; i++) {
                 newMarkedDates[markedArray[i]] = 'period';
+              }
+              for (let i = 0; i < ovulations.length; i++) {
+                newMarkedDates[ovulations[i]] = 'ovulation';
               }
               setMarkedDates(newMarkedDates);
               setModalBackground(false);
@@ -314,6 +313,40 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     position: 'absolute',
     bottom: 0,
+  },
+  headerImage: {
+    position: 'absolute',
+    top: -460,
+    transform: [
+      {
+        rotate: '180deg',
+      },
+    ],
+  },
+  selectPeriodContainer: {
+    paddingBottom: 128,
+    backgroundColor: '#fff',
+  },
+  modalClose: {
+    position: 'absolute',
+    right: 12,
+    top: 12,
+  },
+  modalContainerBottom: {
+    height: (height / 10) * 7,
+    width: width,
+    zIndex: 7,
+  },
+  modalContainerTop: {
+    height: (height / 10) * 3,
+    width: width,
+  },
+  weekendContainer: {
+    flexDirection: 'row',
+    marginHorizontal: 15,
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(0,0,0,0.05)',
   },
 });
 export default CalendarScreen;
