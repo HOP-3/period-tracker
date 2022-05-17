@@ -45,7 +45,7 @@ export const _checkFirstTime = async () => {
 };
 
 export const Provider = ({children}: any) => {
-  const [modalBackground, setModalBackground] = useState(false);
+  const [modalBackground, setModalBackground] = useState(true);
   const [firstTime, setFirstTime] = useState<boolean>(false);
   const date = new Date();
   const year = date.getFullYear();
@@ -68,14 +68,16 @@ export const Provider = ({children}: any) => {
     return obj;
   }, [symptoms]);
   const {userId} = useContext(AuthContext);
-
   useEffect(() => {
     _checkFirstTime().then(async value => {
-      console.log(value);
       if (value === 'null' || value == null) {
         setFirstTime(true);
+      } else {
+        setFirstTime(false);
       }
     });
+  }, []);
+  useEffect(() => {
     const getData = async () => {
       if (userId === null) return;
       let data = await (
