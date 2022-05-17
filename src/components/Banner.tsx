@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Drop from '../assets/svgs/bluedrop.svg';
 import Rhythm from '../assets/svgs/rhythm.svg';
+import { Context } from "../providers/Provider";
+import dateData from '../mock_data/dates.json';
 
 const Banner = () =>{
+      const {today} = useContext(Context);
       const [day,setDay] = useState(26);
       const [rhythm,setRhythm] = useState("Фоликулар");
-      const [probability,setProbability] = useState("Өндөр");
+      const [probability,setProbability] = useState(dateData[today]=="ovulation" ? "Өндөр" : "Бага" );
       return(
             <View style={styles.container}> 
                   <Text style={styles.type}>ОВУЛЯЦИ</Text>

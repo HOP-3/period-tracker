@@ -1,23 +1,23 @@
-import React, { FC, useState } from "react";
+import React, { FC, useContext, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Theme } from "./theme";
 import Drop from '../assets/svgs/bigBlueDrop.svg';
+import { Context } from "../providers/Provider";
+import day from '../mock_data/dates.json';
 
 type CardType = {
       type: "probability" | "rhythm"
 }
 
 const SymptomCard : FC<CardType> = ({type}) =>{
-      const [value,setValue] = useState(type=="rhythm" ? "Фоликулар" : "Өндөр");
+      const {today} = useContext(Context);
+      const [value,setValue] = useState(type=="rhythm" ? "Фоликулар" : day[today]=="ovulation" ? "Өндөр" : "Бага");
       return(
             <View style={styles.container}>
                   <View style={styles.description}>
                         <View style={{flex:1}}>
                               <Text>{type=="probability" ?  "Үр тогтох" : "Инфрадиан"}</Text>
                               <Text>{type=="probability" ?  "магадлал" : "хэмнэл"}</Text>
-                        </View>
-                        <View style={{opacity:0.4}}>
-                              <Drop width={50} height={50}/>
                         </View>
                   </View>
                   <View style={[styles.colorPart,{backgroundColor:type=="rhythm" ? Theme.palette.primary.red : Theme.palette.primary.blue}]}>
