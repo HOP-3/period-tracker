@@ -25,10 +25,10 @@ const {width} = Dimensions.get('screen');
 export const LoginScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const [text, setText] = useState('');
-
   const [confirm, setConfirm] =
     useState<FirebaseAuthTypes.ConfirmationResult | null>(null);
   const [code, setCode] = useState('');
+  const [error, setError] = useState('');
   const signInWithPhoneNumber = async () => {
     const confirmation = await auth().signInWithPhoneNumber('+976' + text);
     setConfirm(confirmation);
@@ -53,8 +53,9 @@ export const LoginScreen = () => {
             navigation.navigate('Content');
           }
         });
-      } catch (error) {
-        console.log('Invalid code.');
+      } catch (err) {
+        console.log(err);
+        setError('Код буруу байна.');
       }
     }
   };
@@ -72,17 +73,26 @@ export const LoginScreen = () => {
           <ImageBackground
             source={require('../assets/images/circles.png')}
             // eslint-disable-next-line react-native/no-inline-styles
-            style={{height: '100%', width: '100%', justifyContent: 'flex-end'}}>
+            style={{
+              height: '100%',
+              width: '100%',
+              justifyContent: 'flex-end',
+              overflow: 'hidden',
+            }}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
               <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                keyboardVerticalOffset={200}
+                keyboardVerticalOffset={300}
                 style={style.inputCircle}>
                 <View style={style.inputContainer}>
                   {confirm ? (
                     <>
                       <View>
-                        <Text style={style.label}>Баталгаажуулах код</Text>
+                        <View style={style.errorContainer}>
+                          <Text style={style.label}>Баталгаажуулах код</Text>
+                          <Text style={style.errorMessage}>{error}</Text>
+                        </View>
+
                         <Input
                           text={code}
                           setText={setCode}
@@ -93,7 +103,10 @@ export const LoginScreen = () => {
                           inputType="number-pad"
                         />
                       </View>
-                      <Button width={width - 50} onPress={confirmCode}>
+                      <Button
+                        width={width - 50}
+                        onPress={confirmCode}
+                        styleButton={{marginTop: 50}}>
                         Нэвтрэх
                       </Button>
                     </>
@@ -113,27 +126,35 @@ export const LoginScreen = () => {
                       </View>
                       <Button
                         width={width - 50}
-                        onPress={signInWithPhoneNumber}>
+                        onPress={signInWithPhoneNumber}
+                        styleButton={{marginTop: 50}}>
                         Нэвтрэх
                       </Button>
                     </>
                   )}
+                  <Button
+                    width={width - 50}
+                    onPress={() => navigation.pop()}
+                    type={'secondary'}
+                    styleButton={{marginTop: 10}}>
+                    Буцах
+                  </Button>
 
-                  {/* <Text>Эсвэл</Text> */}
-                  {/* <View>
-                  <Button
-                    width={width - 50}
-                    type={'secondary'}
-                    iconRight={<Facebook />}>
-                    Facebook -ээр нэвтрэх
-                  </Button>
-                  <Button
-                    width={width - 50}
-                    type={'secondary'}
-                    iconRight={<Google />}>
-                    Google -ээр нэвтрэх
-                  </Button>
-                </View> */}
+                  {/* <Text>Эсвэл</Text>
+                  <View>
+                    <Button
+                      width={width - 50}
+                      type={'secondary'}
+                      iconRight={<Facebook />}>
+                      Facebook -ээр нэвтрэх
+                    </Button>
+                    <Button
+                      width={width - 50}
+                      type={'secondary'}
+                      iconRight={<Google />}>
+                      Google -ээр нэвтрэх
+                    </Button>
+                  </View> */}
                 </View>
               </KeyboardAvoidingView>
             </TouchableWithoutFeedback>
@@ -144,6 +165,15 @@ export const LoginScreen = () => {
   );
 };
 const style = StyleSheet.create({
+  errorMessage: {
+    color: 'red',
+    marginRight: 10,
+    fontWeight: '400',
+  },
+  errorContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   container: {
     backgroundColor: 'white',
     justifyContent: 'center',
@@ -177,10 +207,11 @@ const style = StyleSheet.create({
     borderTopRightRadius: 1000,
     borderTopLeftRadius: 1000,
     alignItems: 'center',
+    // justifyContent: 'center',
     padding: 60,
   },
   inputContainer: {
-    justifyContent: 'space-evenly',
+    // justifyContent: 'space-around',
     flex: 1,
   },
   label: {

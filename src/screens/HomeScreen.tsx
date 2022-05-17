@@ -24,6 +24,7 @@ export const HomeScreen = () => {
   );
 };
 
+
 const styles = StyleSheet.create({
   thisDay: {
     fontWeight: 'bold',

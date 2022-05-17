@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 0,
   },
   header: {
-    // fontFamily: 'Open Sans',
+    fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: '700',
     fontSize: 20,
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
   },
   container: {
-    backgroundColor: Theme.palette.onboarding.red,
+    backgroundColor: Theme.palette.calendar.red,
     borderRadius: 0,
     borderBottomRightRadius: 16,
     borderBottomLeftRadius: 16,
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   containerDisabled: {
-    borderColor: Theme.palette.onboarding.red,
+    borderColor: Theme.palette.calendar.red,
     borderWidth: 1,
     borderRadius: 0,
     borderBottomRightRadius: 16,

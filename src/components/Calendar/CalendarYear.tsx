@@ -78,7 +78,13 @@ export const CalendarYear = ({isVisible, markedDates}: CalendarPropsType) => {
     '12',
   ];
   return (
-    <ScrollView style={[isVisible ? styles.visible : styles.hidden]}>
+    <ScrollView
+      style={[
+        isVisible ? styles.visible : styles.hidden,
+        {
+          flex: 1,
+        },
+      ]}>
       <View style={[styles.calendarYearContainer, styles.center]}>
         {new Array(12).fill(0).map((_, index) => {
           let str = year + '-' + months[index] + '-01';
@@ -155,7 +161,7 @@ const CalendarYearItem = ({
 
 const styles = StyleSheet.create({
   header: {
-    // fontFamily: 'Open Sans',
+    fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: '700',
     fontSize: 20,
@@ -174,7 +180,7 @@ const styles = StyleSheet.create({
     width: (width - 48) / 2,
   },
   calendarItemHeader: {
-    // font-family: 'Open Sans';
+    fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontSize: 16,
     lineHeight: 16,
@@ -187,7 +193,7 @@ const styles = StyleSheet.create({
     display: 'none',
   },
   ovulation: {
-    // fontFamily: 'Open Sans',
+    fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: '700',
     fontSize: 12,
@@ -226,7 +232,6 @@ const styles = StyleSheet.create({
     marginRight: 16,
     marginLeft: 16,
     flexWrap: 'wrap',
-    marginBottom: 24,
   },
 });
 

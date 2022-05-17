@@ -15,34 +15,39 @@ type CalendarPropsType = {
   isVisible: boolean;
 };
 
+const day = ['Ня', 'Да', 'Мя', 'Лх', 'Пү', 'Ба', 'Бя'];
+
 export const CalendarMonth = ({isVisible, markedDates}: CalendarPropsType) => {
   const {month} = useContext(Context);
   return (
-    <CalendarList
-      markingType={'custom'}
-      style={[isVisible ? styles.visible : styles.hidden]}
-      dayComponent={({date, state}) => (
-        <CalendarListDayComponent
-          markedDates={markedDates}
-          date={date}
-          state={state}
-        />
-      )}
-      renderHeader={date => (
-        <View style={styles.headerContainer}>
-          <Text style={styles.header}>
-            {LocaleConfig.locales['mn'].monthNamesShort[date.getMonth()]}
-          </Text>
-        </View>
-      )}
-      pastScrollRange={Number(month) - 1}
-      futureScrollRange={12 - Number(month)}
-      scrollEnabled={true}
-      showScrollIndicator
-      hideDayNames
-      monthFormat={'MMM'}
-      // ...calendarParams
-    />
+    <>
+      <CalendarList
+        markingType={'custom'}
+        style={[isVisible ? styles.visible : styles.hidden]}
+        dayComponent={({date, state}) => (
+          <CalendarListDayComponent
+            markedDates={markedDates}
+            date={date}
+            state={state}
+          />
+        )}
+        renderHeader={date => (
+          <View style={styles.headerContainer}>
+            <Text style={styles.header}>
+              {LocaleConfig.locales['mn'].monthNamesShort[date.getMonth()]}
+            </Text>
+          </View>
+        )}
+        pastScrollRange={Number(month) - 1}
+        futureScrollRange={12 - Number(month)}
+        scrollEnabled={true}
+        showScrollIndicator
+        hideDayNames
+        monthFormat={'MMM'}
+        contentContainerStyle={styles.contentContainer}
+        // ...calendarParams
+      />
+    </>
   );
 };
 
@@ -117,7 +122,7 @@ const CalendarListDayComponent = ({
 
 const styles = StyleSheet.create({
   periodContainer: {
-    backgroundColor: Theme.palette.onboarding.red,
+    backgroundColor: Theme.palette.calendar.red,
     borderRadius: 0,
     borderBottomRightRadius: 16,
     borderBottomLeftRadius: 16,
@@ -160,7 +165,7 @@ const styles = StyleSheet.create({
     display: 'none',
   },
   header: {
-    // fontFamily: 'Open Sans',
+    fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: '700',
     fontSize: 20,
@@ -206,7 +211,7 @@ const styles = StyleSheet.create({
     ],
   },
   symptomContainer: {
-    backgroundColor: Theme.palette.onboarding.red,
+    backgroundColor: Theme.palette.calendar.red,
     borderRadius: 0,
     borderBottomRightRadius: 16,
     borderBottomLeftRadius: 16,
@@ -224,6 +229,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'column',
     opacity: 0.3,
+  },
+  contentContainer: {
+    flex: 1,
   },
 });
 export default CalendarMonth;

@@ -12,9 +12,21 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1925A7BE5DA644F28D4B9D16 /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D54235568FBD44EC9695BD68 /* OpenSans-ExtraBoldItalic.ttf */; };
+		293298AEA14C409886C7913F /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBB504550C294656A156E42E /* OpenSans-Bold.ttf */; };
+		5ABBF7BAE8464DB0B0173486 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D399C55BA1A42F88B6451E2 /* OpenSans-Light.ttf */; };
+		62B5EDEDBE534B4D961C22A9 /* OpenSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10AD966B237C4498BEAFBDA6 /* OpenSans-SemiBoldItalic.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-PeriodTracker-PeriodTrackerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-PeriodTracker-PeriodTrackerTests.a */; };
 		80D0493C2823D36C00AB26D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 80D0493B2823D36B00AB26D7 /* GoogleService-Info.plist */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		84AF592CEAEA47ADADF74D41 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 977F8B0E070540FF9A92951B /* OpenSans-Italic.ttf */; };
+		999AE84581594244AE9F0F7C /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07A3355435CE433588E36736 /* OpenSans-ExtraBold.ttf */; };
+		9A4094F599A74244ADCD8780 /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 031FD998F1384AC4A3D38D5D /* OpenSans-LightItalic.ttf */; };
+		ACE7B9B0474547F7ACE8DF48 /* OpenSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6A908803EC174C478519D659 /* OpenSans-Medium.ttf */; };
+		ADD20BEEBB144BCD832D7B71 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 427CA1677FB54B93ADD1F50B /* OpenSans-Regular.ttf */; };
+		B4E8D65FB72D4789B6CAB3CB /* OpenSans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAD2AB7BB8EC4A2ABDE65512 /* OpenSans-MediumItalic.ttf */; };
+		F11320001AE947F69E09FBD9 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C584F292D9ED4D31BA9F278B /* OpenSans-BoldItalic.ttf */; };
+		F5D40ED62E064948BC5D22D4 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D7B413641AF04B5582B68065 /* OpenSans-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +43,10 @@
 		00E356EE1AD99517003FC87E /* PeriodTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeriodTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* PeriodTrackerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeriodTrackerTests.m; sourceTree = "<group>"; };
+		031FD998F1384AC4A3D38D5D /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-LightItalic.ttf"; path = "../src/assets/fonts/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		07A3355435CE433588E36736 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-ExtraBold.ttf"; path = "../src/assets/fonts/OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		0D399C55BA1A42F88B6451E2 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../src/assets/fonts/OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		10AD966B237C4498BEAFBDA6 /* OpenSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-SemiBoldItalic.ttf"; path = "../src/assets/fonts/OpenSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* PeriodTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeriodTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = PeriodTracker/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = PeriodTracker/AppDelegate.mm; sourceTree = "<group>"; };
@@ -39,12 +55,20 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = PeriodTracker/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-PeriodTracker-PeriodTrackerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PeriodTracker-PeriodTrackerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-PeriodTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeriodTracker.debug.xcconfig"; path = "Target Support Files/Pods-PeriodTracker/Pods-PeriodTracker.debug.xcconfig"; sourceTree = "<group>"; };
+		427CA1677FB54B93ADD1F50B /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Regular.ttf"; path = "../src/assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-PeriodTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeriodTracker.release.xcconfig"; path = "Target Support Files/Pods-PeriodTracker/Pods-PeriodTracker.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-PeriodTracker-PeriodTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeriodTracker-PeriodTrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-PeriodTracker-PeriodTrackerTests/Pods-PeriodTracker-PeriodTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-PeriodTracker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PeriodTracker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A908803EC174C478519D659 /* OpenSans-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Medium.ttf"; path = "../src/assets/fonts/OpenSans-Medium.ttf"; sourceTree = "<group>"; };
 		80D0493B2823D36B00AB26D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = PeriodTracker/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-PeriodTracker-PeriodTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeriodTracker-PeriodTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-PeriodTracker-PeriodTrackerTests/Pods-PeriodTracker-PeriodTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
+		977F8B0E070540FF9A92951B /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Italic.ttf"; path = "../src/assets/fonts/OpenSans-Italic.ttf"; sourceTree = "<group>"; };
+		C584F292D9ED4D31BA9F278B /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-BoldItalic.ttf"; path = "../src/assets/fonts/OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		D54235568FBD44EC9695BD68 /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-ExtraBoldItalic.ttf"; path = "../src/assets/fonts/OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		D7B413641AF04B5582B68065 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-SemiBold.ttf"; path = "../src/assets/fonts/OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		DBB504550C294656A156E42E /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Bold.ttf"; path = "../src/assets/fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		EAD2AB7BB8EC4A2ABDE65512 /* OpenSans-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-MediumItalic.ttf"; path = "../src/assets/fonts/OpenSans-MediumItalic.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -125,6 +149,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				B30C964BB3D242AE80756168 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -138,6 +163,25 @@
 				00E356EE1AD99517003FC87E /* PeriodTrackerTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B30C964BB3D242AE80756168 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DBB504550C294656A156E42E /* OpenSans-Bold.ttf */,
+				C584F292D9ED4D31BA9F278B /* OpenSans-BoldItalic.ttf */,
+				07A3355435CE433588E36736 /* OpenSans-ExtraBold.ttf */,
+				D54235568FBD44EC9695BD68 /* OpenSans-ExtraBoldItalic.ttf */,
+				977F8B0E070540FF9A92951B /* OpenSans-Italic.ttf */,
+				0D399C55BA1A42F88B6451E2 /* OpenSans-Light.ttf */,
+				031FD998F1384AC4A3D38D5D /* OpenSans-LightItalic.ttf */,
+				6A908803EC174C478519D659 /* OpenSans-Medium.ttf */,
+				EAD2AB7BB8EC4A2ABDE65512 /* OpenSans-MediumItalic.ttf */,
+				427CA1677FB54B93ADD1F50B /* OpenSans-Regular.ttf */,
+				D7B413641AF04B5582B68065 /* OpenSans-SemiBold.ttf */,
+				10AD966B237C4498BEAFBDA6 /* OpenSans-SemiBoldItalic.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
@@ -204,7 +248,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1330;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
@@ -249,6 +293,18 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				80D0493C2823D36C00AB26D7 /* GoogleService-Info.plist in Resources */,
+				293298AEA14C409886C7913F /* OpenSans-Bold.ttf in Resources */,
+				F11320001AE947F69E09FBD9 /* OpenSans-BoldItalic.ttf in Resources */,
+				999AE84581594244AE9F0F7C /* OpenSans-ExtraBold.ttf in Resources */,
+				1925A7BE5DA644F28D4B9D16 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
+				84AF592CEAEA47ADADF74D41 /* OpenSans-Italic.ttf in Resources */,
+				5ABBF7BAE8464DB0B0173486 /* OpenSans-Light.ttf in Resources */,
+				9A4094F599A74244ADCD8780 /* OpenSans-LightItalic.ttf in Resources */,
+				ACE7B9B0474547F7ACE8DF48 /* OpenSans-Medium.ttf in Resources */,
+				B4E8D65FB72D4789B6CAB3CB /* OpenSans-MediumItalic.ttf in Resources */,
+				ADD20BEEBB144BCD832D7B71 /* OpenSans-Regular.ttf in Resources */,
+				F5D40ED62E064948BC5D22D4 /* OpenSans-SemiBold.ttf in Resources */,
+				62B5EDEDBE534B4D961C22A9 /* OpenSans-SemiBoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +504,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-PeriodTracker-PeriodTrackerTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -475,6 +532,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-PeriodTracker-PeriodTrackerTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = PeriodTrackerTests/Info.plist;

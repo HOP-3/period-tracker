@@ -1,21 +1,44 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
-import Notification from '../assets/svgs/notification.svg';
+import {View, StyleSheet, Pressable} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+
 import User from '../assets/svgs/user.svg';
 import Logo from '../assets/svgs/logo.svg';
 
+import Notif from '../assets/svgs/notification.svg';
+import NotifEmpty from '../assets/svgs/notificationEmpty.svg';
+
 type HeaderType = {
   icon?: boolean;
+  haveNotif?: boolean;
+  setHaveNotif?: Function;
 };
 
-const Header: React.FC<HeaderType> = ({icon = true}) => {
+const Header: React.FC<HeaderType> = ({
+  icon = true,
+  haveNotif = false,
+  setHaveNotif = () => {},
+}) => {
+  const navigation = useNavigation<any>();
   return (
     <View style={icon ? styles.container : styles.icon}>
       <Logo />
       {icon && (
         <View style={{flexDirection: 'row'}}>
-          <Notification style={{marginRight: 10}} />
-          <User />
+          <Pressable
+            onPress={() => {
+              navigation.navigate('Notification');
+              setHaveNotif(false);
+            }}
+            style={{marginRight: 20}}>
+            {haveNotif ? <Notif /> : <NotifEmpty />}
+          </Pressable>
+          <Pressable
+            onPress={() => {
+              navigation.navigate('Profile');
+            }}>
+            <User />
+          </Pressable>
         </View>
       )}
     </View>

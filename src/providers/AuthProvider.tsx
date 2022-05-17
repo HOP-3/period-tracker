@@ -1,12 +1,19 @@
 import React, {createContext, useEffect, useState} from 'react';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
+import {useNavigation} from '@react-navigation/native';
+import SplashScreen from 'react-native-splash-screen';
+import {RootStackParamList} from '../screens/types';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 type ContextType = {
   userId: string | null;
+  user: FirebaseAuthTypes.User | null;
 };
 
 export const AuthContext = createContext<ContextType>({
   userId: null,
+  user: null,
 });
 
 const makeid = () => {
@@ -19,10 +26,16 @@ const makeid = () => {
   }
   return result;
 };
+type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
 export const AuthProvider = ({children}: any) => {
   const [userId, setUserId] = useState<string | null>(null);
+  const user = auth().currentUser;
+  const navigation = useNavigation<NavigationProps>();
   const makeSureIdIsThere = async () => {
+    if (auth().currentUser == null) {
+      navigation.navigate('Login');
+    }
     const id = await AsyncStorage.getItem('id');
     if (id === null) {
       const newId = makeid();
@@ -31,11 +44,16 @@ export const AuthProvider = ({children}: any) => {
     } else {
       setUserId(id);
     }
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 500);
   };
   useEffect(() => {
     makeSureIdIsThere();
   }, []);
   return (
-    <AuthContext.Provider value={{userId}}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{userId, user}}>
+      {children}
+    </AuthContext.Provider>
   );
 };

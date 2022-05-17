@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Theme} from '../components/theme';
 import Header from '../components/Header';
 import HomeIcon from '../assets/svgs/home.svg';
@@ -9,25 +9,25 @@ import InformationIcon from '../assets/svgs/information.svg';
 import InformationFilledIcon from '../assets/svgs/informationFilled.svg';
 import {HomeScreen, InformationScreen, CalendarScreen} from '../screens';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import auth from '@react-native-firebase/auth';
-import {useNavigation} from '@react-navigation/native';
-import {RootStackParamList} from '../screens/types';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
+const notifications: string[] = [];
 
 const BottomTabs = () => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const Tab = createBottomTabNavigator();
+  const [haveNotification, setHaveNotification] = useState<boolean>(false);
+
   useEffect(() => {
-    auth().onAuthStateChanged(user => {
-      if (!user) {
-        navigation.navigate('Login');
-      }
-    });
-  }, [navigation]);
+    console.log(notifications);
+    if (!notifications.length) {
+      return;
+    }
+    // console.log(notifications);
+    setHaveNotification(true);
+  }, []);
+
+  const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="Нүүр"
       screenOptions={({route}) => ({
         tabBarStyle: {height: 50, paddingBottom: 0},
         tabBarActiveTintColor: Theme.palette.calendar.red,
@@ -47,17 +47,24 @@ const BottomTabs = () => {
       <Tab.Screen
         name="Цаглабар"
         component={CalendarScreen}
-        options={{header: () => <Header />}}
+        options={{
+          header: () => (
+            <Header
+              haveNotif={haveNotification}
+              setHaveNotif={setHaveNotification}
+            />
+          ),
+        }}
       />
       <Tab.Screen
         name="Нүүр"
         component={HomeScreen}
-        options={{header: () => <Header />}}
+        options={{header: () => <Header haveNotif={haveNotification} />}}
       />
       <Tab.Screen
         name="Зөвлөгөө"
         component={InformationScreen}
-        options={{header: () => <Header />}}
+        options={{header: () => <Header haveNotif={haveNotification} />}}
       />
     </Tab.Navigator>
   );
