@@ -21,6 +21,7 @@ type adviceType = {
   data: {
     title: string;
     imageUrl: string;
+    story?: string[];
   }[];
 };
 
@@ -80,7 +81,11 @@ export const InformationScreen = () => {
                   renderItem={({item}) => {
                     return (
                       <View style={styles.mh8}>
-                        <InfoItem title={item.title} imageUrl={item.imageUrl} />
+                        <InfoItem
+                          title={item.title}
+                          imageUrl={item.imageUrl}
+                          story={item.story}
+                        />
                       </View>
                     );
                   }}
