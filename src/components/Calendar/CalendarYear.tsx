@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
   normal: {
     color: '#222B45',
     fontStyle: 'normal',
-    fontWeight: '700',
+    fontWeight: '500',
     fontSize: 12,
   },
   ovulationContainer: {
