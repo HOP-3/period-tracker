@@ -11,7 +11,7 @@ type CardType = {
 
 const SymptomCard : FC<CardType> = ({type}) =>{
       const {today} = useContext(Context);
-      const [value,setValue] = useState(type=="rhythm" ? "Фоликулар" : day[today]=="ovulation" ? "Өндөр" : "Бага");
+      const [value,setValue] = useState(type=="rhythm" ? "Лютеал" : day[today]=="ovulation" ? "Өндөр" : "Бага");
       return(
             <View style={styles.container}>
                   <View style={styles.description}>

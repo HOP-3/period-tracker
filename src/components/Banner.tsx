@@ -7,9 +7,9 @@ import dateData from '../mock_data/dates.json';
 
 const Banner = () =>{
       const {today} = useContext(Context);
-      const [day,setDay] = useState(26);
       const [rhythm,setRhythm] = useState("Фоликулар");
       const [probability,setProbability] = useState(dateData[today]=="ovulation" ? "Өндөр" : "Бага" );
+      const [day,setDay] = useState(26);
       return(
             <View style={styles.container}> 
                   <Text style={styles.type}>ОВУЛЯЦИ</Text>
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
       container:{
             display:'flex',
             flexDirection:'column',
-            paddingTop:40,
+            paddingTop:60,
             paddingLeft:25
       },
       day:{

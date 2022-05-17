@@ -1,12 +1,14 @@
 import React, {useRef, useState} from 'react';
-import {View, Text, StyleSheet, ScrollView, FlatList} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, FlatList,Image} from 'react-native';
 import {SymptomModal} from '../components';
 import Banner from '../components/Banner';
 import SymptomCard from '../components/SymptomCard';
+import Bg from '../assets/pngs/homeScreenBg.png';
 
 export const HomeScreen = () => {
   return (
     <View style={{backgroundColor: 'white', flex: 1}}>
+      <Image source={Bg} style={styles.bg}/>
       <Banner />
       <View style={styles.day}>
         <Text style={styles.thisDay}>Энэ өдөр</Text>
@@ -40,6 +42,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
   },
+  bg:{
+    width:300,
+    height:300,
+    position:"absolute",
+    right:0
+  }
 });
 
 export default HomeScreen;
