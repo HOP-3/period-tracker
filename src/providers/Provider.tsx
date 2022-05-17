@@ -1,9 +1,11 @@
 import React, {
   createContext,
+  Dispatch,
   useContext,
   useEffect,
   useMemo,
   useState,
+  SetStateAction,
 } from 'react';
 import {
   firebase,
@@ -39,6 +41,8 @@ type ContextType = {
   setMenstrualCycleLength: (value: number) => void;
   setModalBackground: (value: boolean) => void;
   howLongHasItbeenSinceLastPeriod: () => Promise<number>;
+  darkMode: number;
+  setDarkMode: Dispatch<SetStateAction<number>>;
 };
 
 export const Context = createContext<ContextType>({
@@ -58,6 +62,8 @@ export const Context = createContext<ContextType>({
   setMenstrualCycleLength: () => {},
   setModalBackground: () => {},
   howLongHasItbeenSinceLastPeriod: () => Promise.resolve(0),
+  darkMode: 0,
+  setDarkMode: () => {},
 });
 export const _checkFirstTime = async () => {
   return await AsyncStorage.getItem('@firstTime');
@@ -186,6 +192,7 @@ export const Provider = ({children}: any) => {
     }
     setMarkedDates(marks);
   };
+  const [darkMode, setDarkMode] = useState(0);
   useEffect(() => {
     _checkFirstTime().then(async value => {
       if (value === 'null' || value == null) {
@@ -229,6 +236,8 @@ export const Provider = ({children}: any) => {
         lastPeriod,
         setLastPeriod,
         markedDates,
+        darkMode,
+        setDarkMode,
       }}>
       {children}
     </Context.Provider>
