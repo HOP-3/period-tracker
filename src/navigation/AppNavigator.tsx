@@ -4,7 +4,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import BottomTabs from '../navigation/BottomTabs';
 import LoginScreen from '../screens/LoginScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {OnBoarding} from '../screens';
+import {Action, OnBoarding} from '../screens';
 import Header from '../components/Header';
 import {ProfileScreen} from '../screens/ProfileScreen';
 import {NotificationScreen} from '../screens/NotificationScreen';
@@ -20,7 +20,8 @@ const height = Dimensions.get('window').height;
 
 export const AppNavigator = () => {
   const navigation = useNavigation<any>();
-  const {modalBackground, setModalBackground} = useContext(Context);
+  const {modalBackground, setModalBackground, firstTime} = useContext(Context);
+
   return (
     <SafeAreaView style={{flex: 1}}>
       {modalBackground && (
@@ -39,10 +40,15 @@ export const AppNavigator = () => {
           onPress={() => setModalBackground(false)}
         />
       )}
-      <Stack.Navigator initialRouteName="OnBoarding">
+      <Stack.Navigator initialRouteName={firstTime ? 'OnBoarding' : 'Content'}>
         <Stack.Screen
           name="OnBoarding"
           component={OnBoarding}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Action"
+          component={Action}
           options={{headerShown: false}}
         />
         <Stack.Screen
