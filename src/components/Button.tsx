@@ -63,10 +63,10 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   secondary: {
-    backgroundColor: Theme.palette.background.default,
-    borderColor: Theme.palette.primary.red,
-    fontWeight: '400',
-    color: Theme.palette.primary.red,
+    backgroundColor: Theme.palette.onboarding.white,
+    borderColor: Theme.palette.onboarding.white, // borderColor: Theme.
+    color: Theme.palette.onboarding.grey,
+    fontWeight: '700',
   },
 });
 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   View,
   Text,
@@ -9,29 +9,29 @@ import {
   SafeAreaView,
 } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
-import {Button} from './';
+import {Button} from './Button';
+import {AuthContext} from '../providers/AuthProvider';
+import {Context} from '../providers/Provider';
 
 const {width} = Dimensions.get('screen');
 
 export const SymptomModal = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [field, setField] = useState<string>('');
-
-  const addData = () => {
-    if (field === '') {
-      return;
-    }
-    firestore()
-      .collection('test')
-      .doc('test')
-      .set({
+  const {userId} = useContext(AuthContext);
+  const {today} = useContext(Context);
+  const addData = async () => {
+    if (field === '') return;
+    await firestore()
+      .collection(`users/${userId}/symptoms`)
+      .add({
         text: field,
+        date: today,
       })
       .then(() => {
         setField('');
       });
   };
-
   return (
     <View>
       <Modal
