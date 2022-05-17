@@ -39,10 +39,10 @@ export const OnBoarding = () => {
   };
 
   const imageData = [
-    require('../assets/pngs/first.png'),
-    require('../assets/pngs/second.png'),
-    require('../assets/pngs/third.png'),
-    require('../assets/pngs/fourth.png'),
+    require('../assets/images/first.png'),
+    require('../assets/images/second.png'),
+    require('../assets/images/third.png'),
+    require('../assets/images/fourth.png'),
   ];
   const data: DataType[] = [
     {

@@ -73,7 +73,7 @@ export const InformationScreen = () => {
               <View key={index}>
                 <Text style={[styles.rowHeader, styles.mh8]}>{item.name}</Text>
                 <FlatList
-                  pagingEnabled={true}
+                  // pagingEnabled={true}
                   contentContainerStyle={styles.adviceContainer}
                   data={item.data}
                   renderItem={({item}) => {
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
   infoContainer: {
     padding: 16,
     height: 136,
-    width: width - 64,
+    width: width - 64 - 16,
     position: 'relative',
     borderWidth: 1,
     borderColor: '#EAEAEA',
