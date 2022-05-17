@@ -33,9 +33,9 @@ export const AuthProvider = ({children}: any) => {
   const user = auth().currentUser;
   const navigation = useNavigation<NavigationProps>();
   const makeSureIdIsThere = async () => {
-    if (auth().currentUser == null) {
-      navigation.navigate('Login');
-    }
+    // if (auth().currentUser == null) {
+    //   navigation.navigate('Login');
+    // }
     const id = await AsyncStorage.getItem('id');
     if (id === null) {
       const newId = makeid();

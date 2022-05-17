@@ -10,6 +10,7 @@ import {
   FirebaseFirestoreTypes,
 } from '@react-native-firebase/firestore';
 import {AuthContext} from './AuthProvider';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface SymptomType extends FirebaseFirestoreTypes.DocumentData {
   text: string;
@@ -25,6 +26,7 @@ type ContextType = {
   symptoms: SymptomType[];
   symptomObj: SymptomObjType;
   modalBackground: boolean;
+  firstTime: boolean;
   setModalBackground: (value: boolean) => void;
 };
 
@@ -35,11 +37,16 @@ export const Context = createContext<ContextType>({
   symptoms: [],
   symptomObj: {},
   modalBackground: false,
+  firstTime: true,
   setModalBackground: () => {},
 });
+export const _checkFirstTime = async () => {
+  return await AsyncStorage.getItem('@firstTime');
+};
 
 export const Provider = ({children}: any) => {
   const [modalBackground, setModalBackground] = useState(false);
+  const [firstTime, setFirstTime] = useState<boolean>(false);
   const date = new Date();
   const year = date.getFullYear();
   const month =
@@ -61,7 +68,14 @@ export const Provider = ({children}: any) => {
     return obj;
   }, [symptoms]);
   const {userId} = useContext(AuthContext);
+
   useEffect(() => {
+    _checkFirstTime().then(async value => {
+      console.log(value);
+      if (value === 'null' || value == null) {
+        setFirstTime(true);
+      }
+    });
     const getData = async () => {
       if (userId === null) return;
       let data = await (
@@ -83,6 +97,7 @@ export const Provider = ({children}: any) => {
         symptomObj,
         modalBackground,
         setModalBackground,
+        firstTime,
       }}>
       {children}
     </Context.Provider>

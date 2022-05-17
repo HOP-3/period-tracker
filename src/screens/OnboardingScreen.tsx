@@ -1,10 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../screens/types';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
 import {
   View,
   Text,
@@ -16,6 +17,7 @@ import {
 
 import {Button} from '../components';
 import {Theme} from '../components/theme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type DataType = {
   description: string;
@@ -27,9 +29,10 @@ export const OnBoarding = () => {
   const navigation = useNavigation<NavigationProps>();
   const [imageIndex, setImageIndex] = useState(0);
 
-  const indexPlus = () => {
+  const indexPlus = async () => {
+    await AsyncStorage.setItem('@firstTime', 'false');
     if (imageIndex + 1 === data.length) {
-      navigation.navigate('Content');
+      navigation.navigate('Action');
     } else {
       setImageIndex(imageIndex + 1);
     }
@@ -71,14 +74,17 @@ export const OnBoarding = () => {
     <View style={styles.container}>
       <View style={{alignSelf: 'flex-end', marginRight: 10}}>
         <Button
-          onPress={() => navigation.navigate('Content')}
+          onPress={() => navigation.navigate('Action')}
           width={80}
           type={'secondary'}>
           Алгасах
         </Button>
       </View>
+
       <Image source={imageData[imageIndex]} />
+
       <Text style={styles.title}>{data[imageIndex].title}</Text>
+
       <Text style={styles.description}>{data[imageIndex].description}</Text>
       <View style={{flexDirection: 'row', justifyContent: 'center'}}>
         {imageData.map((_, index) => (
