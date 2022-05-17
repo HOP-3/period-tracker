@@ -16,7 +16,6 @@ const BottomTabs = () => {
   const [haveNotification, setHaveNotification] = useState<boolean>(false);
 
   useEffect(() => {
-    // console.log(notifications);
     if (!notifications.length) {
       return;
     }

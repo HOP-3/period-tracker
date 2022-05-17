@@ -20,8 +20,7 @@ const height = Dimensions.get('window').height;
 
 export const AppNavigator = () => {
   const navigation = useNavigation<any>();
-  const {modalBackground, setModalBackground, firstTime} = useContext(Context);
-
+  const {modalBackground, setModalBackground} = useContext(Context);
   return (
     <SafeAreaView style={{flex: 1}}>
       {modalBackground && (
@@ -40,7 +39,7 @@ export const AppNavigator = () => {
           onPress={() => setModalBackground(false)}
         />
       )}
-      <Stack.Navigator initialRouteName={firstTime ? 'OnBoarding' : 'Content'}>
+      <Stack.Navigator initialRouteName={'Content'}>
         <Stack.Screen
           name="OnBoarding"
           component={OnBoarding}
@@ -86,11 +85,6 @@ export const AppNavigator = () => {
               </Pressable>
             ),
           }}
-        />
-        <Stack.Screen
-          name="Story"
-          component={StoryScreen}
-          options={{headerShown: false}}
         />
         <Stack.Screen
           name="Story"
