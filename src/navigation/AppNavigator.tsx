@@ -21,7 +21,7 @@ const height = Dimensions.get('window').height;
 export const AppNavigator = () => {
   const navigation = useNavigation<any>();
   const {modalBackground, setModalBackground, firstTime} = useContext(Context);
-
+ 
   return (
     <SafeAreaView style={{flex: 1}}>
       {modalBackground && (
