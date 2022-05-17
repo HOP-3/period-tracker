@@ -1,12 +1,12 @@
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {View, Image, Pressable, StyleSheet, Dimensions} from 'react-native';
 import Close from '../assets/svgs/close.svg';
 // import {Context} from '../providers/Provider';
 import {RootStackParamList} from './types';
 
-const {width, height} = Dimensions.get('screen');
+const {width} = Dimensions.get('screen');
 
 export const StoryScreen = ({route}: {route: {params: {images: string[]}}}) => {
   const stories: string[] = route.params.images;

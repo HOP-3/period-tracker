@@ -13,6 +13,12 @@ import {
 } from '@react-native-firebase/firestore';
 import {AuthContext} from './AuthProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useNavigation} from '@react-navigation/native';
+import {RootStackParamList} from '../screens/types';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+// import Facebook from '../assets/svgs/facebook.svg';';
+// import Google from '../assets/svgs/google.svg';
+type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
 interface SymptomType extends FirebaseFirestoreTypes.DocumentData {
   text: string;
@@ -44,7 +50,7 @@ type ContextType = {
   darkMode: number;
   setDarkMode: Dispatch<SetStateAction<number>>;
 };
-//as
+
 export const Context = createContext<ContextType>({
   today: '',
   month: '',
@@ -70,7 +76,8 @@ export const _checkFirstTime = async () => {
 };
 
 export const Provider = ({children}: any) => {
-  const [firstTime, setFirstTime] = useState<boolean>(false);
+  const navigation = useNavigation<NavigationProps>();
+  const [firstTime, setFirstTime] = useState<boolean>(true);
   const date = new Date();
   const year = date.getFullYear();
   const month =
@@ -195,13 +202,15 @@ export const Provider = ({children}: any) => {
   const [darkMode, setDarkMode] = useState(0);
   useEffect(() => {
     _checkFirstTime().then(async value => {
-      if (value === 'null' || value == null) {
+      console.log(value);
+      if (value === null) {
         setFirstTime(true);
+        navigation.navigate('OnBoarding');
       } else {
         setFirstTime(false);
       }
     });
-  }, []);
+  }, [navigation]);
   useEffect(() => {
     const getData = async () => {
       if (userId === null) return;

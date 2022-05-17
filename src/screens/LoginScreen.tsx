@@ -17,7 +17,7 @@ import firestore from '@react-native-firebase/firestore';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from './types';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-// import Facebook from '../assets/svgs/facebook.svg';
+// import Facebook from '../assets/svgs/facebook.svg';';
 // import Google from '../assets/svgs/google.svg';
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 const {width} = Dimensions.get('screen');

@@ -71,13 +71,13 @@ export const InformationScreen = () => {
             )}
             renderSectionHeader={({section}) => <Text>{section.name}</Text>}
           /> */}
-            {advice.map((item: adviceType, index) => (
-              <View key={index}>
-                <Text style={[styles.rowHeader, styles.mh8]}>{item.name}</Text>
+            {advice.map((item1: adviceType, index1) => (
+              <View key={index1}>
+                <Text style={[styles.rowHeader, styles.mh8]}>{item1.name}</Text>
                 <FlatList
                   // pagingEnabled={true}
                   contentContainerStyle={styles.adviceContainer}
-                  data={item.data}
+                  data={item1.data}
                   renderItem={({item}) => {
                     return (
                       <View style={styles.mh8}>

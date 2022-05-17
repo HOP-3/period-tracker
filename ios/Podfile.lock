@@ -1079,14 +1079,14 @@ PODS:
     - React-perflogger (= 0.68.1)
   - RNCAsyncStorage (1.17.4):
     - React-Core
-  - RNFBApp (14.9.4):
+  - RNFBApp (14.9.3):
     - Firebase/CoreOnly (= 8.15.0)
     - React-Core
-  - RNFBAuth (14.9.4):
+  - RNFBAuth (14.9.3):
     - Firebase/Auth (= 8.15.0)
     - React-Core
     - RNFBApp
-  - RNFBFirestore (14.9.4):
+  - RNFBFirestore (14.9.3):
     - Firebase/Firestore (= 8.15.0)
     - React-Core
     - RNFBApp
@@ -1342,9 +1342,9 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 7285b499d0339104b2813a1f58ad1ada4adbd6c0
   ReactCommon: bf2888a826ceedf54b99ad1b6182d1bc4a8a3984
   RNCAsyncStorage: 9367a646dc24e3ab7b6874d79bc1bfd0832dce58
-  RNFBApp: bef4ec5a6d31a3da9bf285379d0c4857c6b7313e
-  RNFBAuth: 8694f1f043c75424455726b9b246a9ce12fb5518
-  RNFBFirestore: 841f319bfba0fbf3bd48fae80145301941219dd6
+  RNFBApp: b6276fc67748c7174275cace56776f0228ae58b2
+  RNFBAuth: fce6c25e6416660487ac620eac0343a555bb1812
+  RNFBFirestore: a760c82871d98daf2009a882b38436a446d95f17
   RNScreens: 40a2cb40a02a609938137a1e0acfbf8fc9eebf19
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608

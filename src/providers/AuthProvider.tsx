@@ -1,10 +1,7 @@
 import React, {createContext, useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
-import {useNavigation} from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen';
-import {RootStackParamList} from '../screens/types';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 type ContextType = {
   userId: string | null;
@@ -26,12 +23,10 @@ const makeid = () => {
   }
   return result;
 };
-type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
 export const AuthProvider = ({children}: any) => {
   const [userId, setUserId] = useState<string | null>(null);
   const user = auth().currentUser;
-  const navigation = useNavigation<NavigationProps>();
   const makeSureIdIsThere = async () => {
     // if (auth().currentUser == null) {
     //   navigation.navigate('Login');
