@@ -15,10 +15,7 @@ type CalendarPropsType = {
   isVisible: boolean;
 };
 
-const day = ['Ня', 'Да', 'Мя', 'Лх', 'Пү', 'Ба', 'Бя'];
-
 export const CalendarMonth = ({isVisible, markedDates}: CalendarPropsType) => {
-  const {month} = useContext(Context);
   return (
     <>
       <CalendarList
@@ -38,8 +35,8 @@ export const CalendarMonth = ({isVisible, markedDates}: CalendarPropsType) => {
             </Text>
           </View>
         )}
-        pastScrollRange={Number(month) - 1}
-        futureScrollRange={12 - Number(month)}
+        pastScrollRange={0}
+        futureScrollRange={2}
         scrollEnabled={true}
         showScrollIndicator
         hideDayNames
@@ -80,7 +77,7 @@ const CalendarListDayComponent = ({
   }, [symptomObj, date, markedDates]);
   return (
     <Pressable
-      style={[styles.center, {position: 'relative'}]}
+      style={[styles.center, {position: 'relative', height: 68}]}
       onPress={() => setIsSymptomModalOpen(!isSymptomModalOpen)}>
       <View style={{alignItems: 'center'}}>
         <SymptomShowModal

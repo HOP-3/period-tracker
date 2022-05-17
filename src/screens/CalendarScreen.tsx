@@ -32,30 +32,15 @@ const width = Dimensions.get('window').width;
 const day = ['Ня', 'Да', 'Мя', 'Лх', 'Пү', 'Ба', 'Бя'];
 
 export const CalendarScreen = () => {
+  const {
+    setModalBackground,
+    modalBackground,
+    markedDates: marks,
+  } = useContext(Context);
   const [isMonth, setIsMonth] = useState(true);
-  const [markedDates, setMarkedDates] = useState<MarkedDatesType>({
-    '2022-04-15': 'ovulation',
-    '2022-05-01': 'period',
-    '2022-05-02': 'period',
-    '2022-05-09': 'period',
-    '2022-05-12': 'period',
-    '2022-05-15': 'period',
-    '2022-05-16': 'period',
-    '2022-05-21': 'period',
-    '2022-05-22': 'period',
-    '2022-05-23': 'period',
-    '2022-05-24': 'period',
-    '2022-05-25': 'period',
-    '2022-06-15': 'ovulation',
-    '2022-06-16': 'ovulation',
-    '2022-06-21': 'ovulation',
-    '2022-06-22': 'ovulation',
-    '2022-06-23': 'ovulation',
-    '2022-06-24': 'ovulation',
-    '2022-06-25': 'ovulation',
-  });
+
+  const [markedDates, setMarkedDates] = useState<MarkedDatesType>(marks);
   const [editModalVisible, setEditModalVisible] = useState(false);
-  const {setModalBackground, modalBackground} = useContext(Context);
   useEffect(() => {
     if (modalBackground == false) {
       setEditModalVisible(false);
