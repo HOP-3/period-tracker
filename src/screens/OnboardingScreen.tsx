@@ -1,19 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../screens/types';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  Pressable,
-  Dimensions,
-} from 'react-native';
+import {View, Text, Image, StyleSheet, Dimensions} from 'react-native';
 
 import {Button} from '../components';
 import {Theme} from '../components/theme';

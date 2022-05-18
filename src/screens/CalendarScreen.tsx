@@ -97,8 +97,8 @@ export const CalendarScreen = () => {
       </View>
 
       <View style={{flex: 1, position: 'relative'}}>
-        <CalendarMonth markedDates={markedDates} isVisible={isMonth} />
-        <CalendarYear markedDates={markedDates} isVisible={!isMonth} />
+        <CalendarMonth isVisible={isMonth} />
+        <CalendarYear isVisible={!isMonth} />
         <View style={styles.editBtn}>
           <Button
             width={149}
