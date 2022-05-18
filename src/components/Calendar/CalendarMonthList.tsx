@@ -1,122 +1,49 @@
-import React, {useContext, useMemo, useState} from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import React, {memo, useContext} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import {CalendarList, LocaleConfig} from 'react-native-calendars';
-
-import {Context} from '../../providers/Provider';
-import {SymptomShowModal} from './CalendarSymptomModal';
-
-import Drop from '../../assets/svgs/miniCard Icons.svg';
-import BlueDropLet from '../../assets/svgs/bluedrop.svg';
-
+import CalendarListDay from './CalendarListDay';
 import {Theme} from '../theme';
+import {Context} from '../../providers/Provider';
 
 type CalendarPropsType = {
-  markedDates: {[key: string]: 'period' | 'ovulation' | 'normal'};
   isVisible: boolean;
 };
 
-export const CalendarMonth = ({isVisible, markedDates}: CalendarPropsType) => {
-  return (
-    <>
-      <CalendarList
-        markingType={'custom'}
-        style={[isVisible ? styles.visible : styles.hidden]}
-        dayComponent={({date, state}) => (
-          <CalendarListDayComponent
-            markedDates={markedDates}
-            date={date}
-            state={state}
-          />
-        )}
-        renderHeader={date => (
-          <View style={styles.headerContainer}>
-            <Text style={styles.header}>
-              {LocaleConfig.locales['mn'].monthNamesShort[date.getMonth()]}
-            </Text>
-          </View>
-        )}
-        pastScrollRange={0}
-        futureScrollRange={2}
-        scrollEnabled={true}
-        showScrollIndicator
-        hideDayNames
-        monthFormat={'MMM'}
-        contentContainerStyle={styles.contentContainer}
-        // ...calendarParams
-      />
-    </>
-  );
-};
+const monthNamesShort = [
+  '1-р сар',
+  '2-р сар',
+  '3-р сар',
+  '4-р сар',
+  '5-р сар',
+  '6-р сар',
+  '7-р сар',
+  '8-р сар',
+  '9-р сар',
+  '10-р сар',
+  '11-р сар',
+  '12-р сар',
+];
 
-const CalendarListDayComponent = ({
-  date,
-  state,
-  markedDates,
-}: {
-  date: any;
-  state: string | undefined;
-  markedDates: {[key: string]: 'period' | 'ovulation' | 'normal'};
-}) => {
-  const {today, symptomObj} = useContext(Context);
-  const [isSymptomModalOpen, setIsSymptomModalOpen] = useState(false);
-  const type = useMemo(() => {
-    if (date) {
-      const dateString = date.dateString;
-      if (markedDates[dateString]) {
-        if (date.dateString <= today) {
-          return markedDates[dateString];
-        }
-        if (markedDates[dateString] === 'ovulation') {
-          return 'ovulation';
-        }
-        return 'possible_' + markedDates[dateString];
-      }
-    } else {
-      return 'normal';
-    }
-  }, [symptomObj, date, markedDates]);
-  return (
-    <Pressable
-      style={[styles.center, {position: 'relative', height: 68}]}
-      onPress={() => setIsSymptomModalOpen(!isSymptomModalOpen)}>
-      <View style={{alignItems: 'center'}}>
-        <SymptomShowModal
-          setIsVisible={setIsSymptomModalOpen}
-          visible={isSymptomModalOpen}
-          symptoms={symptomObj[date.dateString]}
-        />
-        {date?.dateString && symptomObj[date?.dateString] && (
-          <View style={styles.symptomDot} />
-        )}
-        {/* {state === 'today' && <Text style={{fontWeight: '700'}}>Ө</Text>} */}
-        <View
-          style={[
-            styles.center,
-            date?.dateString &&
-              symptomObj[date?.dateString] &&
-              styles.symptomContainer,
-            type === 'period' && styles.periodContainer,
-            state === 'today' &&
-              (type == 'period' ? styles.todayPeriod : styles.today),
-            styles.monthlyCalendarItem,
-          ]}>
-          <Text
-            style={[
-              (type === 'period' ||
-                (date?.dateString && symptomObj[date?.dateString])) &&
-                styles.periodText,
-              {fontWeight: state === 'today' ? '700' : '400'},
-            ]}>
-            {date?.day}
-          </Text>
-        </View>
-        {type == 'ovulation' && <BlueDropLet />}
-        {type == 'possible_period' && <Drop />}
+export const CalendarMonth = ({isVisible}: CalendarPropsType) => (
+  <CalendarList
+    style={[isVisible ? styles.visible : styles.hidden]}
+    dayComponent={({date, state}) => (
+      <CalendarListDay date={date} state={state} />
+    )}
+    renderHeader={date => (
+      <View style={styles.headerContainer}>
+        <Text style={styles.header}>{monthNamesShort[date.getMonth()]}</Text>
       </View>
-    </Pressable>
-  );
-};
-
+    )}
+    pastScrollRange={2}
+    futureScrollRange={2}
+    // showScrollIndicator
+    hideDayNames
+    monthFormat={'MMM'}
+    contentContainerStyle={styles.contentContainer}
+    // ...calendarParams
+  />
+);
 const styles = StyleSheet.create({
   periodContainer: {
     backgroundColor: Theme.palette.calendar.red,
@@ -231,4 +158,4 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-export default CalendarMonth;
+export default memo(CalendarMonth);

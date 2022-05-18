@@ -14,14 +14,12 @@ import {Theme} from '../theme';
 import {Context} from '../../providers/Provider';
 
 type CalendarPropsType = {
-  markedDates: {[key: string]: 'period' | 'ovulation' | 'normal'};
   isVisible: boolean;
 };
 
 type CalendarYearItemType = {
   month: string;
   isCurrentMonth: boolean;
-  markedDates: {[key: string]: 'period' | 'ovulation' | 'normal'};
 };
 
 LocaleConfig.locales['mn'] = {
@@ -61,7 +59,7 @@ LocaleConfig.defaultLocale = 'mn';
 
 const width = Dimensions.get('window').width;
 
-export const CalendarYear = ({isVisible, markedDates}: CalendarPropsType) => {
+export const CalendarYear = ({isVisible}: CalendarPropsType) => {
   const {month, year} = useContext(Context);
   const months = [
     '01',
@@ -90,7 +88,6 @@ export const CalendarYear = ({isVisible, markedDates}: CalendarPropsType) => {
           let str = year + '-' + months[index] + '-01';
           return str ? (
             <CalendarYearItem
-              markedDates={markedDates}
               month={str}
               key={index}
               isCurrentMonth={month == months[index]}
@@ -101,12 +98,9 @@ export const CalendarYear = ({isVisible, markedDates}: CalendarPropsType) => {
     </ScrollView>
   );
 };
-const CalendarYearItem = ({
-  month,
-  isCurrentMonth,
-  markedDates,
-}: CalendarYearItemType) =>
-  month ? (
+const CalendarYearItem = ({month, isCurrentMonth}: CalendarYearItemType) => {
+  const {markedDates} = useContext(Context);
+  return month ? (
     <Calendar
       current={month}
       monthFormat={'MMM'}
@@ -158,6 +152,7 @@ const CalendarYearItem = ({
       hideExtraDays
     />
   ) : null;
+};
 
 const styles = StyleSheet.create({
   header: {

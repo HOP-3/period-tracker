@@ -92,6 +92,7 @@ export const Provider = ({children}: any) => {
   const [lastPeriod, setLastPeriod] = useState(today);
   const [symptoms, setSymptoms] = useState<any[]>([]);
   const [markedDates, setMarkedDates] = useState<MarkedDatesType>({});
+
   const symptomObj = useMemo(() => {
     let obj: SymptomObjType = {};
     for (let i = 0; i < symptoms.length; i++) {

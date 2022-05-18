@@ -31,6 +31,10 @@ export const SymptomShowModal = ({
   return (
     <Modal visible={visible} transparent>
       <View style={styles.symptomModalContainer}>
+        <Pressable
+          onPress={() => setIsVisible(false)}
+          style={styles.symptomBack}
+        />
         <View style={styles.symptomModalMiddleContainer}>
           <Pressable
             onPress={() => setIsVisible(false)}
@@ -38,15 +42,13 @@ export const SymptomShowModal = ({
             <Exit />
           </Pressable>
           {symptoms && symptoms.length > 0 ? (
-            symptoms.map((symptom, index) => {
-              return (
-                <View key={index}>
-                  <Text>* {symptom.text}</Text>
-                </View>
-              );
-            })
+            symptoms.map((symptom, index) => (
+              <View key={index}>
+                <Text>{symptom.text}</Text>
+              </View>
+            ))
           ) : (
-            <Text>Симптомыг тохируулаагүй байна</Text>
+            <Text>Шинж тэмдэг оруулаагүй байна</Text>
           )}
         </View>
       </View>
@@ -58,17 +60,28 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
   },
   symptomModalMiddleContainer: {
     width: width - 64,
     backgroundColor: 'white',
-    padding: 32,
+    paddingHorizontal: 16,
+    paddingVertical: 32,
+    zIndex: 4,
+    borderRadius: 8,
   },
   symptomModalExit: {
     position: 'absolute',
     right: 8,
     top: 8,
+  },
+  symptomBack: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    zIndex: 1,
   },
 });
 export default SymptomShowModal;
