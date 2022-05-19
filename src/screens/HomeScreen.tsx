@@ -13,27 +13,6 @@ import SymptomCard from '../components/SymptomCard';
 import Bg from '../assets/pngs/homeScreenBg.png';
 import Period from '../components/Period';
 
-const header = () => (
-  <View>
-    <Image source={Bg} style={styles.bg} />
-    <Banner />
-    <View style={styles.day}>
-      <Text style={styles.thisDay}>Энэ өдөр</Text>
-      <View style={{height: 200}}>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <View style={{paddingLeft: 25}}>
-            <SymptomModal />
-          </View>
-          <SymptomCard type={'probability'} />
-          <SymptomCard type={'rhythm'} />
-        </ScrollView>
-      </View>
-      <Text>Мөчлөгийн түүх</Text>
-      <Period />
-    </View>
-  </View>
-);
-
 export const HomeScreen = () => {
   return (
     <ScrollView style={{flex: 1, backgroundColor: 'white'}} showsHorizontalScrollIndicator={false}>

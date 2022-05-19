@@ -1,17 +1,15 @@
 import React, { FC, useContext, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Theme } from "./theme";
-import Drop from '../assets/svgs/bigBlueDrop.svg';
 import { Context } from "../providers/Provider";
-import day from '../mock_data/dates.json';
 
 type CardType = {
       type: "probability" | "rhythm"
 }
 
 const SymptomCard : FC<CardType> = ({type}) =>{
-      const {today} = useContext(Context);
-      const [value,setValue] = useState(type=="rhythm" ? "Лютеал" : day[today]=="ovulation" ? "Өндөр" : "Бага");
+      const {today,markedDates} = useContext(Context);
+      const [value,setValue] = useState(type=="rhythm" ? "Лютеал" : markedDates[today]=="ovulation" ? "Өндөр" : "Бага");
       return(
             <View style={styles.container}>
                   <View style={styles.description}>

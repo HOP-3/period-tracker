@@ -1,15 +1,27 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Drop from '../assets/svgs/bluedrop.svg';
 import Rhythm from '../assets/svgs/rhythm.svg';
 import { Context } from "../providers/Provider";
-import dateData from '../mock_data/dates.json';
 
 const Banner = () =>{
       const {today} = useContext(Context);
       const [rhythm,setRhythm] = useState("Фоликулар");
-      const [probability,setProbability] = useState(dateData[today]=="ovulation" ? "Өндөр" : "Бага" );
-      const [day,setDay] = useState(26);
+      const {markedDates} = useContext(Context);
+      const [probability,setProbability] = useState(markedDates[today]=="ovulation" ? "Өндөр" : "Бага" );
+      const day = useMemo(()=>{
+            let found=false,count=0,after=false;
+            Object.keys(markedDates).map((item)=>{
+                  if(item==today) after=true;
+                  if(after){
+                        if(markedDates[item]=="ovulation"){
+                              found=true;
+                        }
+                        else if(found==false) count++;
+                  }
+            });
+            return count;
+        },[markedDates]);
       return(
             <View style={styles.container}> 
                   <Text style={styles.type}>ОВУЛЯЦИ</Text>
