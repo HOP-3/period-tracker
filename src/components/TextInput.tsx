@@ -12,6 +12,8 @@ type Props = {
   inputType?: KeyboardTypeOptions;
   maxLength?: number | undefined;
   type: 'phoneNumber' | 'codeConfirmation' | 'onboarding' | 'default';
+  multiline?: boolean;
+  numberOfLines?: number;
 };
 
 export const Input: FC<Props> = ({
@@ -23,6 +25,8 @@ export const Input: FC<Props> = ({
   inputType = 'default',
   type = 'default',
   maxLength,
+  multiline,
+  numberOfLines,
 }) => {
   return type === 'onboarding' ? (
     <TextInput
@@ -35,11 +39,15 @@ export const Input: FC<Props> = ({
         styles.boarding,
         {width: width === undefined ? '100%' : width, height: height},
       ]}
+      multiline={multiline}
+      numberOfLines={numberOfLines}
+      textAlignVertical={'top'}
     />
   ) : (
     <View
       style={[
         styles.container,
+        multiline && {alignItems: 'flex-start'},
         {width: width === undefined ? '100%' : width, height: height},
       ]}>
       {type === 'phoneNumber' && <Phone />}
@@ -51,6 +59,9 @@ export const Input: FC<Props> = ({
         keyboardType={inputType}
         maxLength={maxLength}
         style={styles.login}
+        multiline={multiline}
+        numberOfLines={numberOfLines}
+        textAlignVertical={'top'}
       />
     </View>
   );
