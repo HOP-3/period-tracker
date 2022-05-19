@@ -4,7 +4,6 @@ import {
   View,
   Text,
   Modal,
-  TextInput,
   StyleSheet,
   Dimensions,
   SafeAreaView,
@@ -15,17 +14,20 @@ import firestore from '@react-native-firebase/firestore';
 import {Button} from './Button';
 import {AuthContext} from '../providers/AuthProvider';
 import {Context} from '../providers/Provider';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import Header from './Header';
+import {Input} from './TextInput';
 
 const {width} = Dimensions.get('screen');
 
 export const SymptomModal = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [field, setField] = useState<string>('');
-  const {userId,user} = useContext(AuthContext);
+  const {userId, user} = useContext(AuthContext);
   const {today} = useContext(Context);
   const navigation = useNavigation<any>();
   const addData = async () => {
+    console.log('asd');
     if (field === '') return;
     await firestore()
       .collection(`users/${userId}/symptoms`)
@@ -37,6 +39,7 @@ export const SymptomModal = () => {
         setField('');
       });
   };
+  console.log(userId);
   return (
     <View>
       <Modal
@@ -47,16 +50,18 @@ export const SymptomModal = () => {
           setModalVisible(!modalVisible);
         }}>
         <SafeAreaView>
+          <Header icon={false} />
           <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             style={styles.modal}>
-            <TextInput
-              onChangeText={setField}
-              multiline
-              numberOfLines={4}
-              style={styles.input}
-              editable
-              value={field}
+            <Input
+              setText={setField}
+              text={field}
+              placeholder={'Тэмдэглэгээ'}
+              type="default"
+              multiline={true}
+              numberOfLines={10}
+              height={250}
             />
             <View style={styles.modalBottom}>
               <Button
@@ -83,14 +88,15 @@ export const SymptomModal = () => {
         <View style={styles.top}>
           <Text style={styles.captionText}>Шинж тэмдэг</Text>
         </View>
-        <Button onPress={() =>{
-          if(auth().currentUser!==null){
-            setModalVisible(true);
-            return;
-          }
-          else navigation.navigate("Login");
-
-        }} width={155} fontSize={32}>
+        <Button
+          onPress={() => {
+            if (auth().currentUser !== null) {
+              setModalVisible(true);
+              return;
+            } else navigation.navigate('Login');
+          }}
+          width={155}
+          fontSize={32}>
           +
         </Button>
       </View>
@@ -108,15 +114,10 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   modal: {
-    // marginTop: 'auto',
-    // marginBottom: 'auto',
-    // marginRight: 'auto',
-    // marginLeft: 'auto',
     padding: 10,
-    // width: width,
     height: '100%',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
   },
   top: {
     flex: 1,
@@ -135,11 +136,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
   },
-  input: {
-    borderRadius: 10,
-    borderWidth: 1,
-    padding: 10,
-  },
   modalBtnText: {
     color: 'white',
     fontSize: 32,
@@ -151,6 +147,7 @@ const styles = StyleSheet.create({
     lineHeight: 27,
   },
   modalBottom: {
+    margin: 20,
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
