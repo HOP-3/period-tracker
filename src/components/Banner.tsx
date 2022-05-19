@@ -4,6 +4,32 @@ import Drop from '../assets/svgs/bluedrop.svg';
 import Rhythm from '../assets/svgs/rhythm.svg';
 import { Context } from "../providers/Provider";
 
+const howManyDaysBetweenTwoDate = (date1: string, date2: string) => {
+      const date1Arr = date1.split('-');
+      const date2Arr = date2.split('-');
+      const date1Obj = new Date(
+        parseInt(date1Arr[0]),
+        parseInt(date1Arr[1]) - 1,
+        parseInt(date1Arr[2]),
+        0,
+        0,
+        0,
+        0,
+      );
+      const date2Obj = new Date(
+        parseInt(date2Arr[0]),
+        parseInt(date2Arr[1]) - 1,
+        parseInt(date2Arr[2]),
+        0,
+        0,
+        0,
+        0,
+      );
+      const timeDiff = Math.abs(date2Obj.getTime() - date1Obj.getTime());
+      const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      return diffDays;
+};
+
 const Banner = () =>{
       const {today} = useContext(Context);
       const [rhythm,setRhythm] = useState("Фоликулар");
@@ -12,12 +38,13 @@ const Banner = () =>{
       const day = useMemo(()=>{
             let found=false,count=0,after=false;
             Object.keys(markedDates).map((item)=>{
+                  if(found) return;
                   if(item==today) after=true;
                   if(after){
                         if(markedDates[item]=="ovulation"){
+                              count = howManyDaysBetweenTwoDate(today,item);
                               found=true;
                         }
-                        else if(found==false) count++;
                   }
             });
             return count;
@@ -25,7 +52,7 @@ const Banner = () =>{
       return(
             <View style={styles.container}> 
                   <Text style={styles.type}>ОВУЛЯЦИ</Text>
-                  <Text style={styles.day}>{day} өдрийн дараа</Text>
+                  <Text style={styles.day}>{day===0 ? "Өнөөдөр" : `${day} өдрийн дараа`}</Text>
                   <View style={styles.additional} >
                         <Drop/>
                         <Text style={styles.normal}> Үр тогтох магадлал </Text>

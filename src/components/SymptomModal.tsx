@@ -1,4 +1,5 @@
 import React, {useContext, useState} from 'react';
+import auth from '@react-native-firebase/auth';
 import {
   View,
   Text,
@@ -14,14 +15,16 @@ import firestore from '@react-native-firebase/firestore';
 import {Button} from './Button';
 import {AuthContext} from '../providers/AuthProvider';
 import {Context} from '../providers/Provider';
+import { useNavigation } from '@react-navigation/native';
 
 const {width} = Dimensions.get('screen');
 
 export const SymptomModal = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [field, setField] = useState<string>('');
-  const {userId} = useContext(AuthContext);
+  const {userId,user} = useContext(AuthContext);
   const {today} = useContext(Context);
+  const navigation = useNavigation<any>();
   const addData = async () => {
     if (field === '') return;
     await firestore()
@@ -80,7 +83,14 @@ export const SymptomModal = () => {
         <View style={styles.top}>
           <Text style={styles.captionText}>Шинж тэмдэг</Text>
         </View>
-        <Button onPress={() => setModalVisible(true)} width={155} fontSize={32}>
+        <Button onPress={() =>{
+          if(auth().currentUser!==null){
+            setModalVisible(true);
+            return;
+          }
+          else navigation.navigate("Login");
+
+        }} width={155} fontSize={32}>
           +
         </Button>
       </View>
