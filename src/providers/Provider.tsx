@@ -1,9 +1,11 @@
 import React, {
   createContext,
+  Dispatch,
   useContext,
   useEffect,
   useMemo,
   useState,
+  SetStateAction,
 } from 'react';
 import {
   firebase,
@@ -11,6 +13,12 @@ import {
 } from '@react-native-firebase/firestore';
 import {AuthContext} from './AuthProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useNavigation} from '@react-navigation/native';
+import {RootStackParamList} from '../screens/types';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+// import Facebook from '../assets/svgs/facebook.svg';';
+// import Google from '../assets/svgs/google.svg';
+type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
 interface SymptomType extends FirebaseFirestoreTypes.DocumentData {
   text: string;
@@ -39,6 +47,8 @@ type ContextType = {
   setMenstrualCycleLength: (value: number) => void;
   setModalBackground: (value: boolean) => void;
   howLongHasItbeenSinceLastPeriod: () => Promise<number>;
+  darkMode: number;
+  setDarkMode: Dispatch<SetStateAction<number>>;
 };
 
 export const Context = createContext<ContextType>({
@@ -58,13 +68,16 @@ export const Context = createContext<ContextType>({
   setMenstrualCycleLength: () => {},
   setModalBackground: () => {},
   howLongHasItbeenSinceLastPeriod: () => Promise.resolve(0),
+  darkMode: 0,
+  setDarkMode: () => {},
 });
 export const _checkFirstTime = async () => {
   return await AsyncStorage.getItem('@firstTime');
 };
 
 export const Provider = ({children}: any) => {
-  const [firstTime, setFirstTime] = useState<boolean>(false);
+  const navigation = useNavigation<NavigationProps>();
+  const [firstTime, setFirstTime] = useState<boolean>(true);
   const date = new Date();
   const year = date.getFullYear();
   const month =
@@ -79,6 +92,7 @@ export const Provider = ({children}: any) => {
   const [lastPeriod, setLastPeriod] = useState(today);
   const [symptoms, setSymptoms] = useState<any[]>([]);
   const [markedDates, setMarkedDates] = useState<MarkedDatesType>({});
+
   const symptomObj = useMemo(() => {
     let obj: SymptomObjType = {};
     for (let i = 0; i < symptoms.length; i++) {
@@ -186,15 +200,18 @@ export const Provider = ({children}: any) => {
     }
     setMarkedDates(marks);
   };
+  const [darkMode, setDarkMode] = useState(0);
   useEffect(() => {
     _checkFirstTime().then(async value => {
-      if (value === 'null' || value == null) {
+      console.log(value);
+      if (value === null) {
         setFirstTime(true);
+        navigation.navigate('OnBoarding');
       } else {
         setFirstTime(false);
       }
     });
-  }, []);
+  }, [navigation]);
   useEffect(() => {
     const getData = async () => {
       if (userId === null) return;
@@ -229,6 +246,8 @@ export const Provider = ({children}: any) => {
         lastPeriod,
         setLastPeriod,
         markedDates,
+        darkMode,
+        setDarkMode,
       }}>
       {children}
     </Context.Provider>
